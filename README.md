@@ -684,13 +684,13 @@ innet((
 You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
 ### Performance
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
-You can find this in the [test]() folder and check by self.
+You can find this in the [test](https://github.com/d8corp/innet/tree/main/test) folder and check by self.
 #### React
 #### Vue
 #### Svelte
 #### innet
 ### Best Practices
-Use [@innet/for]() plugin to render arrays or any iterable object.
+Use [@innet/for](https://github.com/d8corp/innet-for) plugin to render arrays or any iterable object.
 ```typescript jsx
 import innet from 'innet'
 import fp from '@innet/for'
