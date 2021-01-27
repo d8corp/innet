@@ -1,6 +1,4 @@
-<center>
-  <img src="https://raw.githubusercontent.com/d8corp/innet/main/logo.svg" alt="innet" />
-</center>
+[![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
 # innet
 [![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
