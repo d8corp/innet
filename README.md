@@ -1,5 +1,5 @@
 <center>
-  <img src="https://raw.githubusercontent.com/d8corp/innet/logo.svg" alt="innet" />
+  <img src="https://raw.githubusercontent.com/d8corp/innet/main/logo.svg" alt="innet" />
 </center>
 
 # innet
