@@ -686,25 +686,17 @@ You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
 You can find this in the [test](https://github.com/d8corp/innet/tree/main/test) folder and check by self.
 #### React
-[Link](https://d8corp.github.io/innet/react/)
-![](https://d8corp.github.io/innet/results/4.lighthouse.react.png)
-![](https://d8corp.github.io/innet/results/8.ram.react.png)
-![](https://d8corp.github.io/innet/results/12.performance.react.png)
+[Link](https://d8corp.github.io/innet/react/)  
+[![react](https://d8corp.github.io/innet/results/react.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826201552.html)
 #### Vue
-[Link](https://d8corp.github.io/innet/vue/)
-![](https://d8corp.github.io/innet/results/3.lighthouse.vue.png)
-![](https://d8corp.github.io/innet/results/7.ram.vue.png)
-![](https://d8corp.github.io/innet/results/11.performance.vue.png)
+[Link](https://d8corp.github.io/innet/vue/)  
+[![vue](https://d8corp.github.io/innet/results/vue.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826359534.html)
 #### Svelte
-[Link](https://d8corp.github.io/innet/svelte/)
-![](https://d8corp.github.io/innet/results/2.lighthouse.svelte.png)
-![](https://d8corp.github.io/innet/results/6.ram.svelte.png)
-![](https://d8corp.github.io/innet/results/10.performance.svelte.png)
+[Link](https://d8corp.github.io/innet/svelte/)  
+[![svelte](https://d8corp.github.io/innet/results/svelte.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826389387.html)
 #### innet
-[Link](https://d8corp.github.io/innet/innet/)
-![](https://d8corp.github.io/innet/results/1.lighthouse.innet.png)
-![](https://d8corp.github.io/innet/results/5.ram.innet.png)
-![](https://d8corp.github.io/innet/results/9.performance.innet.png)
+[Link](https://d8corp.github.io/innet/innet/)  
+[![innet](https://d8corp.github.io/innet/results/innet.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826152703.html)
 ### Best Practices
 Use [@innet/for](https://github.com/d8corp/innet-for) plugin to render arrays or any iterable object.
 ```typescript jsx
