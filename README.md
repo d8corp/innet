@@ -684,7 +684,7 @@ innet((
 You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
 ### Performance
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
-You can find this in the [test](https://github.com/d8corp/innet/tree/main/test) folder and check by self.
+You can find this in the [folder](https://github.com/d8corp/innet/tree/main/docs) and check by self.
 #### React
 [Link](https://d8corp.github.io/innet/react/)  
 [![react](https://d8corp.github.io/innet/results/react.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826201552.html)
