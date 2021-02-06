@@ -4,7 +4,8 @@
 [![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
 [![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
-[![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)  
+[![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
+[![tests](https://github.com/d8corp/innet/workflows/tests/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
 **innet** is a view library with no virtual DOM rendering.
 It gives more performance and less RAM using.
 ### Installation
