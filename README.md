@@ -685,26 +685,24 @@ You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
 ### Performance
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
 You can find this in the [folder](https://github.com/d8corp/innet/tree/main/docs) and check by self.
-#### React
-[Link](https://d8corp.github.io/innet/react/)  
-[![react](https://d8corp.github.io/innet/results/react.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826201552.html)
-#### Vue
-[Link](https://d8corp.github.io/innet/vue/)  
-[![vue](https://d8corp.github.io/innet/results/vue.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826359534.html)
-#### Svelte
-[Link](https://d8corp.github.io/innet/svelte/)  
-[![svelte](https://d8corp.github.io/innet/results/svelte.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826389387.html)
-#### innet
-[Link](https://d8corp.github.io/innet/innet/)  
-[![innet](https://d8corp.github.io/innet/results/innet.png)](https://builder-dot-lighthouse-ci.appspot.com/report.1611826152703.html)
+#### [React](https://d8corp.github.io/innet/react/)
+[![react](https://d8corp.github.io/innet/results/react.png)](https://d8corp.github.io/innet/react/)
+#### [Vue](https://d8corp.github.io/innet/vue/)
+[![vue](https://d8corp.github.io/innet/results/vue.png)](https://d8corp.github.io/innet/vue/)
+#### [Svelte](https://d8corp.github.io/innet/svelte/)
+[![svelte](https://d8corp.github.io/innet/results/svelte.png)](https://d8corp.github.io/innet/svelte/)
+#### [innet](https://d8corp.github.io/innet/innet/)
+[![innet](https://d8corp.github.io/innet/results/innet.png)](https://d8corp.github.io/innet/innet/)
 ### Best Practices
 Use [@innet/for](https://github.com/d8corp/innet-for) plugin to render arrays or any iterable object.
 ```typescript jsx
 import innet from 'innet'
 import fp from '@innet/for'
 
+const names = new Set(['Mike', 'Michael'])
+
 innet((
-  <for of={new Set(['Mike', 'Deight'])}>
+  <for of={names}>
     {name => (
       <div>
         name: {name}
