@@ -1,12 +1,11 @@
-<center>
-  <img src="https://raw.githubusercontent.com/d8corp/innet/logo.svg" alt="innet" />
-</center>
+[![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
 # innet
 [![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
 [![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
-[![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)  
+[![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
+[![tests](https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
 **innet** is a view library with no virtual DOM rendering.
 It gives more performance and less RAM using.
 ### Installation
@@ -686,19 +685,25 @@ innet((
 You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
 ### Performance
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
-You can find this in the [test]() folder and check by self.
-#### React
-#### Vue
-#### Svelte
-#### innet
+You can find this in the [folder](https://github.com/d8corp/innet/tree/main/docs) and check by self.
+#### [React](https://d8corp.github.io/innet/react/)
+[![react](https://d8corp.github.io/innet/results/react.png)](https://d8corp.github.io/innet/react/)
+#### [Vue](https://d8corp.github.io/innet/vue/)
+[![vue](https://d8corp.github.io/innet/results/vue.png)](https://d8corp.github.io/innet/vue/)
+#### [Svelte](https://d8corp.github.io/innet/svelte/)
+[![svelte](https://d8corp.github.io/innet/results/svelte.png)](https://d8corp.github.io/innet/svelte/)
+#### [innet](https://d8corp.github.io/innet/innet/)
+[![innet](https://d8corp.github.io/innet/results/innet.png)](https://d8corp.github.io/innet/innet/)
 ### Best Practices
-Use [@innet/for]() plugin to render arrays or any iterable object.
+Use [@innet/for](https://github.com/d8corp/innet-for) plugin to render arrays or any iterable object.
 ```typescript jsx
 import innet from 'innet'
 import fp from '@innet/for'
 
+const names = new Set(['Mike', 'Michael'])
+
 innet((
-  <for of={new Set(['Mike', 'Deight'])}>
+  <for of={names}>
     {name => (
       <div>
         name: {name}
