@@ -13,7 +13,8 @@
     "test:coverage": "jest --coverage",
     "patch": "bin/release -patch -rollup",
     "minor": "bin/release -minor -rollup",
-    "major": "bin/release -major -rollup"
+    "major": "bin/release -major -rollup",
+    "size": "gzip-size --raw lib/innet.min.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "core-js": "^3.8.3",
+    "gzip-size-cli": "^4.0.0",
     "jest": "^26.6.3",
     "minimist": ">=0.2.1",
     "rimraf": "^3.0.2",
