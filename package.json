@@ -56,7 +56,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "watch-state": "^2.0.1"
+    "watch-state": "^3.0.3"
   },
   "bin": {
     "innet": "./bin/innet"

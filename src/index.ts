@@ -1,4 +1,4 @@
-import {Watch, onClear} from 'watch-state'
+import {Watch} from 'watch-state'
 
 import scope from './scope'
 import {ContentElements, append, clear} from './utils/dom'
@@ -103,8 +103,6 @@ function onMounted (callback: () => any) {
   currentMounted.push(callback)
 }
 
-const onDestructor = onClear
-
 function dom (content, parent, plugins) {
   const {props, type, children} = content
   const element = document.createElement(type)
@@ -193,7 +191,7 @@ function innet<C extends Content, P extends Parent = Parent> (content: C, parent
           scope.currentPlugins = plugins
           const component = new (type as any)(props, children)
           if ('destructor' in component) {
-            onDestructor(() => component.destructor())
+            Watch.activeWatcher?.onDestroy(() => component.destructor())
           }
           innet(component.render(props, children), parent, plugins, defaultPlugin)
           if ('mounted' in component) {
@@ -254,7 +252,6 @@ export {
   Props,
   Plugin,
   onMounted,
-  onDestructor,
   JSXTemplateElement,
 }
 

@@ -552,8 +552,10 @@ To use jsx with TypeScript just change `tsconfig.json` options:
 and import `innet` when you use JSX.
 > I look forward all you need in the future is changing of `jsx` option to `innet`.
 ### Decorators
-You can use `state`, `cache`, `event` and other decorators from [watch-state](https://www.npmjs.com/package/watch-state).
+You can use `state`, `cache`, `event` and other decorators from [@watch-state/decorators](https://www.npmjs.com/package/@watch-state/decorators).
 ```typescript jsx
+import {state} from '@watch-state/decorators'
+
 class App {
   @state name = 'World'
 
