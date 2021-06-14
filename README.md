@@ -1,6 +1,6 @@
 [![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
-# &nbsp; &nbsp; &nbsp; &nbsp; innet
+# &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; innet
 [![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
 [![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
