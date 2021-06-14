@@ -1,6 +1,6 @@
 [![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
-# innet
+# &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; innet
 [![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
 [![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
@@ -552,8 +552,10 @@ To use jsx with TypeScript just change `tsconfig.json` options:
 and import `innet` when you use JSX.
 > I look forward all you need in the future is changing of `jsx` option to `innet`.
 ### Decorators
-You can use `state`, `cache`, `event` and other decorators from [watch-state](https://www.npmjs.com/package/watch-state).
+You can use `state`, `cache`, `event` and other decorators from [@watch-state/decorators](https://www.npmjs.com/package/@watch-state/decorators).
 ```typescript jsx
+import {state} from '@watch-state/decorators'
+
 class App {
   @state name = 'World'
 

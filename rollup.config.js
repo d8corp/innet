@@ -2,27 +2,17 @@ import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import {terser} from 'rollup-plugin-terser'
 import commonjs from '@rollup/plugin-commonjs'
+import glob from 'glob'
 
-const input = {
-  index: 'src/index.ts',
-  'Context/index': 'src/Context/index.ts',
-  'Context/Context': 'src/Context/Context.ts',
-  'utils/dom/index': 'src/utils/dom/index.ts',
-  'utils/dom/dom': 'src/utils/dom/dom.ts',
-  'utils/test/getHTML': 'src/utils/test/getHTML.ts',
-  'utils/test/renderElement': 'src/utils/test/renderElement.ts',
-  'Ref/index': 'src/Ref/index.ts',
-  'Ref/Ref': 'src/Ref/Ref.ts',
-  'scope/index': 'src/scope/index.ts',
-  'scope/scope': 'src/scope/scope.ts',
-}
+const input = glob.sync('{src/index.ts,src/**/index.ts}')
 
 export default [{
   input,
   output: {
     dir: 'lib',
     entryFileNames: '[name]' + pkg.main.replace('index', ''),
-    format: 'cjs'
+    format: 'cjs',
+    preserveModules: true
   },
   plugins: [
     typescript({
@@ -43,7 +33,8 @@ export default [{
   output: {
     dir: 'lib',
     entryFileNames: '[name]' + pkg.module.replace('index', ''),
-    format: 'es'
+    format: 'es',
+    preserveModules: true
   },
   plugins: [
     typescript({

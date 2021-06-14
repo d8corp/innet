@@ -1,4 +1,3 @@
-import { onClear } from 'watch-state';
 import { ContentElements } from './utils/dom';
 import Ref from './Ref';
 declare type HTMLKey = keyof HTMLElementTagNameMap;
@@ -69,7 +68,6 @@ declare function create<T extends JSXType, P extends Props, C extends Children>(
 declare function isComponent(value: Record<any, any>): value is Component;
 declare function isContextNode(value: any): value is NodeContext;
 declare function onMounted(callback: () => any): void;
-declare const onDestructor: typeof onClear;
 declare function dom(content: any, parent: any, plugins: any): void;
 interface DefaultPlugin<C extends Content = Content, P extends Parent = Parent> {
     (content: C, parent: P, plugins: TPluginsObject): void;
@@ -79,7 +77,7 @@ declare namespace innet {
     var create: typeof import(".").create;
 }
 export default innet;
-export { create, isComponent, isContextNode, innet, dom, Ref, JSXType, Content, Children, Parent, TPluginsObject, Component, Template, JSXElement, NodeContext, DefaultPlugin, Watcher, Model, Props, Plugin, onMounted, onDestructor, JSXTemplateElement, };
+export { create, isComponent, isContextNode, innet, dom, Ref, JSXType, Content, Children, Parent, TPluginsObject, Component, Template, JSXElement, NodeContext, DefaultPlugin, Watcher, Model, Props, Plugin, onMounted, JSXTemplateElement, };
 export { Context } from './Context';
 export * from './utils/dom';
 declare global {
