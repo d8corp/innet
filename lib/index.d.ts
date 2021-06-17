@@ -66,7 +66,7 @@ interface Component<P extends Props = Props, C extends Content = Content> {
 }
 declare function create<T extends JSXType, P extends Props, C extends Children>(target: T, props: P, ...children: C): JSXElement<P>;
 declare function isComponent(value: Record<any, any>): value is Component;
-declare function isContextNode(value: any): value is NodeContext;
+declare function isContextNode(value: Object): value is NodeContext;
 declare function onMounted(callback: () => any): void;
 declare function dom(content: any, parent: any, plugins: any): void;
 interface DefaultPlugin<C extends Content = Content, P extends Parent = Parent> {

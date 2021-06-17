@@ -6,7 +6,8 @@
 [![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
 [![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
 [![tests](https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
-**innet** is a view library with no virtual DOM rendering.
+
+**innet** is a view library with no virtual DOM rendering.  
 It gives more performance and less RAM using.
 ### Installation
 npm

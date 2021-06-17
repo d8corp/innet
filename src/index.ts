@@ -92,9 +92,9 @@ function create <T extends JSXType, P extends Props, C extends Children> (target
   return result
 }
 function isComponent (value: Record<any, any>): value is Component {
-  return 'render' in value?.prototype
+  return typeof value?.prototype?.render === 'function'
 }
-function isContextNode (value: any): value is NodeContext {
+function isContextNode (value: Object): value is NodeContext {
   return 'context' in value
 }
 
