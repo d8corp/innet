@@ -9,7 +9,7 @@
 
 **innet** is a view library with no virtual DOM rendering.  
 It gives more performance and less RAM using.
-### Installation
+## Installation
 npm
 ```bash
 npm i innet
@@ -19,12 +19,16 @@ yarn
 yarn add innet
 ```
 
-Also, you can download a minified js file
-[here](https://github.com/d8corp/innet/blob/master/lib/innet.min.js).  
-*It adds only `innet` to global scope.*  
-*It depends on [watch-state](https://github.com/d8corp/watch-state/blob/master/lib/watch-state.min.js) which adds `watchState` to global scope*
+Or you can include the scripts into the `head`.
+```html
+<!-- Dependencies (watchState) -->
+<script defer src="https://unpkg.com/watch-state/watch-state.min.js"></script>
 
-### Boilerplate
+<!-- Target (innet) -->
+<script defer src="https://unpkg.com/innet/innet.min.js"></script>
+```
+
+## Boilerplate
 Create `innet` app with the next commands, and get a boilerplate that supports `hot-reload`, `scss-modules`, `TypesScript`, `JSX` and other features.
 ```bash
 npx innet my-app
@@ -32,7 +36,7 @@ cd my-app
 npm start
 ```
 *change `my-app` to your application name*
-### Hello, World!
+## Hello, World!
 When you use the boilerplate, you get "Hello, World" example.
 If you don't, create `index.html` with the next content.
 ```html
@@ -74,18 +78,18 @@ Open the HTML file in your browser to see "Hello, World!".
 ```javascript
 innet('Hello, World!', document.getElementById('app'))
 ```
-### Content
+## Content
 Content is the first argument of `innet` function. Above you've seen that `string` can be the `Content`.
 What else you can put to the first argument.
 #### Number
 ```typescript
 innet(42)
 ```
-#### Array of Content
+### Array of Content
 ```typescript
 innet(['Hello ', 42])
 ```
-#### HTML Element
+### HTML Element
 ```typescript
 const div = document.createElement('div')
 div.innerText = 'Hello, World!'
@@ -94,7 +98,7 @@ innet(div)
 // innet([div])
 // innet([42, div])
 ```
-#### JSX Element
+### JSX Element
 You can rewrite above example this way:
 ```typescript
 innet({
@@ -170,7 +174,7 @@ If you click on the button, you get "Hello, World" popup message.
 
 `type` can be a `Template`, a `Component` or a `string` from `plugins`.
 
-##### Template
+#### Template
 Template is a function that should return Content.
 ```typescript jsx
 function Page () {
@@ -214,7 +218,7 @@ You will get.
   Hello, World!
 </div>
 ```
-##### Component
+#### Component
 Component is a `class` which has `render` method, the method should return `Content`.
 ```javascript
 class MyComponent {
@@ -253,7 +257,7 @@ class MyComponent extends Component {
   }
 }
 ```
-### State Management
+## State Management
 `innet` uses [watch-state](https://www.npmjs.com/package/watch-state) for the state management.
 `watch-state` was specially developed for `innet`.
 
@@ -267,7 +271,7 @@ With the boilerplate:
 import {State} from 'watch-state'
 // const {State} = require('watch-state')
 ```
-#### Props Watcher
+### Props Watcher
 Use a function as a props watcher.
 ```javascript
 const show = new State(true)
@@ -285,7 +289,7 @@ innet({
   children: ['Click Me']
 })
 ```
-#### Content Watcher
+### Content Watcher
 Use a function as a `Content`.
 ```javascript
 const show = new State(true)
@@ -346,7 +350,7 @@ function Test (props, children) {
 }
 ```
 
-### Context
+## Context
 You can pass a value from a parent element through any children to the place you need.
 
 Vanilla:
@@ -392,7 +396,7 @@ innet([
   {type: Color}
 ])
 ```
-### Life Cycle
+## Life Cycle
 Each `Template` and `Component` renders only once. They have 3 steps of life cycle:
 - **render** (DOM elements are not created)
 - **mounted** (DOM elements are created)
@@ -452,7 +456,7 @@ function Test () {
 
 innet(() => show.value ? {type: Test} : undefined)
 ```
-### Ref
+## Ref
 You can get an `HTML Element` from `JSX Element` by `ref` prop and `Ref` class from `innet`.
 ```javascript
 const button = new Ref()
@@ -481,7 +485,7 @@ function Test () {
   }
 }
 ```
-### Typescript
+## Typescript
 `innet` has developed on `TypeScript`.  
 `TypeScript` helps to predict a bug, for example, you cannot use a class without render method as a Component.
 ```typescript
@@ -515,7 +519,7 @@ Use generic of `Context`.
 ```typescript
 const color = new Context<string|number>('red')
 ```
-### JSX
+## JSX
 You can comfortably create `JSX Elements` with `JSX`.
 ```typescript jsx
 const button = (
@@ -551,7 +555,27 @@ To use jsx with TypeScript just change `tsconfig.json` options:
 }
 ```
 and import `innet` when you use JSX.
-> I look forward all you need in the future is changing of `jsx` option to `innet`.
+## New Way of JSX
+The old way converts JSX to JS like React does. When you open `JSXElement` you run a function from a library.
+```typescript jsx
+(<div id='hello'>Hello</div>);
+
+// converts to
+
+(innet.create('div', {id: 'hello'}, 'Hello'));
+```
+With new way it transpile to an object.
+```typescript jsx
+(<div id='hello'>Hello</div>);
+
+// converts to
+
+({type: 'div', props: {id: 'hello'}, children: ['Hello']});
+```
+To get it use [innetjs](https://www.npmjs.com/package/innetjs) framework.
+
+Also, you can use [Rollup](https://www.npmjs.com/package/rollup) with [rollup-plugin-innet-jsx](https://www.npmjs.com/package/rollup-plugin-innet-jsx).  
+If you use `TypeScript` setup `jsx` option of `tsconfig.json` to `preserve`.
 ### Decorators
 You can use `state`, `cache`, `event` and other decorators from [@watch-state/decorators](https://www.npmjs.com/package/@watch-state/decorators).
 ```typescript jsx
