@@ -1,14 +1,25 @@
 [![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
 # &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; innet
-[![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
+[![NPM](https://img.shields.io/npm/v/innet.svg)](https://www.npmjs.com/package/innet)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
-[![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
+[![downloads](https://img.shields.io/npm/dm/innet.svg)](https://snyk.io/advisor/npm-package/innet)
 [![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
 [![tests](https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
 
-**innet** is a view library with no virtual DOM rendering.  
-It gives more performance and less RAM using.
+**innet** is a library for web application building with no virtual DOM rendering,
+that gives more performance and less RAM using.
+
+This is a light library, use it even on small projects.
+But the same time this is a powerful library,
+many modern features are available to use like:
+component approach, state management, context, fragment, portals, etc.
+
+[CHANGELOG](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
+
+[![stars](https://img.shields.io/github/stars/d8corp/innet?style=social)](https://github.com/d8corp/innet/stargazers)
+[![watchers](https://img.shields.io/github/watchers/d8corp/innet?style=social)](https://github.com/d8corp/innet/watchers)
+
 ## Installation
 npm
 ```bash
