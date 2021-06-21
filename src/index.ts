@@ -6,10 +6,10 @@ import Ref from './Ref'
 
 type HTMLKey = keyof HTMLElementTagNameMap
 
-type JSXType<P extends Props = Props, C extends Content = Content> = HTMLKey | string | Template<P, C> | TComponent<P, C>
-type Content <P extends Props = Props> = JSXElement<P> | ContentElements | string | number | Watcher | NodeContext | Children
-type Children = Content[]
-type Parent = Comment | Element | DocumentFragment
+export type JSXType<P extends Props = Props, C extends Content = Content> = HTMLKey | string | Template<P, C> | TComponent<P, C>
+export type Content <P extends Props = Props> = JSXElement<P> | ContentElements | string | number | Watcher | NodeContext | Children
+export type Children = Content[]
+export type Parent = Comment | Element | DocumentFragment
 
 /** An object which going through the app */
 type TContext = Record<symbol, any>
@@ -18,9 +18,9 @@ type TContext = Record<symbol, any>
 type TPlugins = Record<string, Plugin>
 
 
-type TPluginsObject = (TContext | TPlugins) & {__proto__?: TPluginsObject}
+export type TPluginsObject = (TContext | TPlugins) & {__proto__?: TPluginsObject}
 
-interface JSXTemplateElement<P extends Props = Props, C extends Content = Content> {
+export interface JSXTemplateElement<P extends Props = Props, C extends Content = Content> {
   type?: Template<P, C>
   props?: P
   children?: Content[]
@@ -41,44 +41,39 @@ interface JSXHTMLElement {
   children?: Content[]
 }
 
-type JSXElement <P extends Props = Props> = JSXTemplateElement<P> | JSXComponentElement<P> | JSXStringElement | JSXHTMLElement
+export type JSXElement <P extends Props = Props> = JSXTemplateElement<P> | JSXComponentElement<P> | JSXStringElement | JSXHTMLElement
 
-interface NodeContext {
+export interface NodeContext {
   children: Content
   context: TPluginsObject
 }
-interface Watcher <C extends Content = Content> {
+export interface Watcher <C extends Content = Content> {
   (update: boolean): C
 }
-interface Props {
+export interface Props {
   [key: string]: any
 }
 interface HTMLProps extends Props {
   ref?: Ref
 }
-interface Plugin {
+export interface Plugin {
   (content: JSXElement, parent: Parent, plugins: TPluginsObject, plugin: DefaultPlugin): void
 }
 
-interface Model <P extends Props = Props, C extends Children = Children> {
-  [key: string]: any
-  render?: never
-}
-
-interface Template <P extends Props = Props, C extends Content = Content> {
+export interface Template <P extends Props = Props, C extends Content = Content> {
   (props?: P, children?: C): Content
 }
 interface TComponent <P extends Props = Props, C extends Content = Content> {
   new (p?: P, c?: C): Component<P, C>
 }
 
-interface Component <P extends Props = Props, C extends Content = Content> {
-  destructor? (props?: P): void
-  mounted? (props?: P): void
-  render (props?: P, children?: C): Content
+export interface Component <P extends Props = Props, C extends Content = Content> {
+  destructor? (props?: P, ...other: any[]): void
+  mounted? (props?: P, ...other: any[]): void
+  render (props?: P, children?: C, ...other: any[]): Content
 }
 
-function create <T extends JSXType, P extends Props, C extends Children> (target: T, props: P, ...children: C): JSXElement<P> {
+export function create <T extends JSXType, P extends Props, C extends Children> (target: T, props: P, ...children: C): JSXElement<P> {
   const result: JSXElement<P> = {}
   if (target) {
     result.type = target
@@ -91,19 +86,19 @@ function create <T extends JSXType, P extends Props, C extends Children> (target
   }
   return result
 }
-function isComponent (value: Record<any, any>): value is Component {
+export function isComponent (value: Record<any, any>): value is Component {
   return typeof value?.prototype?.render === 'function'
 }
-function isContextNode (value: Object): value is NodeContext {
+export function isContextNode (value: Object): value is NodeContext {
   return 'context' in value
 }
 
 let currentMounted: Function[]
-function onMounted (callback: () => any) {
+export function onMounted (callback: () => any) {
   currentMounted.push(callback)
 }
 
-function dom (content, parent, plugins) {
+export function dom (content, parent, plugins) {
   const {props, type, children} = content
   const element = document.createElement(type)
   if (props) {
@@ -159,11 +154,11 @@ function dom (content, parent, plugins) {
   }
 }
 
-interface DefaultPlugin <C extends Content = Content, P extends Parent = Parent> {
+export interface DefaultPlugin <C extends Content = Content, P extends Parent = Parent> {
   (content: C, parent: P, plugins: TPluginsObject): void
 }
 
-function innet<C extends Content, P extends Parent = Parent> (content: C, parent: P = document.body as unknown as P, plugins: TPluginsObject = scope.currentPlugins, defaultPlugin: DefaultPlugin<C, P> = dom): P {
+export function innet<C extends Content, P extends Parent = Parent> (content: C, parent: P = document.body as unknown as P, plugins: TPluginsObject = scope.currentPlugins, defaultPlugin: DefaultPlugin<C, P> = dom): P {
   if (content instanceof Node) {
     append(parent, content as ContentElements)
   }
@@ -231,28 +226,7 @@ function innet<C extends Content, P extends Parent = Parent> (content: C, parent
 innet.create = create
 export default innet
 export {
-  create,
-  isComponent,
-  isContextNode,
-  innet,
-  dom,
-  Ref,
-  JSXType,
-  Content,
-  Children,
-  Parent,
-  TPluginsObject,
-  Component,
-  Template,
-  JSXElement,
-  NodeContext,
-  DefaultPlugin,
-  Watcher,
-  Model,
-  Props,
-  Plugin,
-  onMounted,
-  JSXTemplateElement,
+  Ref
 }
 
 export {Context} from './Context'

@@ -28,16 +28,23 @@ Or you can include the scripts into the `head`.
 <script defer src="https://unpkg.com/innet/innet.min.js"></script>
 ```
 
-## Boilerplate
-Create `innet` app with the next commands, and get a boilerplate that supports `hot-reload`, `scss-modules`, `TypesScript`, `JSX` and other features.
+## Framework
+[innet](#) is a **library**.  
+You can include it into any project and start using without preprocessing and limits.
+
+[innetjs](https://www.npmjs.com/package/innetjs) is a **framework**.  
+Run the next commands, and get all you need to develop with
+`Hot Reload`, `SCSS Modules`, `TypesScript`, `JSX`, `Jest`, `Proxy` and other features.
 ```bash
 npx innet my-app
 cd my-app
 npm start
 ```
 *change `my-app` to your application name*
+
+You can learn more [here](https://www.npmjs.com/package/innetjs).
 ## Hello, World!
-When you use the boilerplate, you get "Hello, World" example.
+When you use `init` command of [innetjs](https://www.npmjs.com/package/innetjs), you get "Hello, World" example.
 If you don't, create `index.html` with the next content.
 ```html
 <!doctype html>
@@ -56,9 +63,10 @@ Put `index.js` near the `index.html` and add the next content:
 innet('Hello, World!')
 ```
 
-Open the HTML file in your browser to see "Hello, World!".
+That's it. Open the HTML file in your browser to see "Hello, World!".
 
-`innet` works with `body` by default. If you want to use another parent, put the parent to the second argument.
+## Parent
+`innet` works with `body` by default. If you want to use another parent, put it to the second argument.
 
 `index.html`
 ```html
@@ -79,25 +87,31 @@ Open the HTML file in your browser to see "Hello, World!".
 innet('Hello, World!', document.getElementById('app'))
 ```
 ## Content
-Content is the first argument of `innet` function. Above you've seen that `string` can be the `Content`.
-What else you can put to the first argument.
-#### Number
+`Content` is the first argument of `innet` function.  
+Above, in the "Hello World!" example, you've seen `string` as `Content`.
+
+You can put to the first argument: 
+### Number
+Any type of numbers can be used.
 ```typescript
 innet(42)
 ```
+*`NaN` shows as is*
 ### Array of Content
+Array is like Document Fragment, you can make a content without root element.
 ```typescript
 innet(['Hello ', 42])
 ```
+*array of array of another one, it doesn't matter*
 ### HTML Element
+You can provide an HTML Element as a content. It works in any piece of the application.
 ```typescript
 const div = document.createElement('div')
 div.innerText = 'Hello, World!'
 
 innet(div)
-// innet([div])
-// innet([42, div])
 ```
+*You can combine `Content` as you wish `innet([div]), innet([42, div])`*
 ### JSX Element
 You can rewrite above example this way:
 ```typescript
@@ -576,7 +590,7 @@ To get it use [innetjs](https://www.npmjs.com/package/innetjs) framework.
 
 Also, you can use [Rollup](https://www.npmjs.com/package/rollup) with [rollup-plugin-innet-jsx](https://www.npmjs.com/package/rollup-plugin-innet-jsx).  
 If you use `TypeScript` setup `jsx` option of `tsconfig.json` to `preserve`.
-### Decorators
+## Decorators
 You can use `state`, `cache`, `event` and other decorators from [@watch-state/decorators](https://www.npmjs.com/package/@watch-state/decorators).
 ```typescript jsx
 import {state} from '@watch-state/decorators'
@@ -624,7 +638,7 @@ function App () {
   )
 }
 ```
-### Code Splitting
+## Code Splitting
 You can create a logic of `Component`.
 ```typescript jsx
 class User {
@@ -678,8 +692,8 @@ class Profile {
   render () {...}
 }
 ```
-So you can split a logic, and a view to the different files and reuse them.
-### Plugins
+So you can split logic and view to different files and reuse them.
+## Plugins
 You can extend new features by plugins. You need to provide an object of plugins to the third argument of `innet`.
 ```javascript
 import innet from 'innet'
@@ -710,7 +724,8 @@ innet((
 ), undefined, {port: portal})
 ```
 You can find more plugins [here](https://www.npmjs.com/search?q=%40innet).
-### Performance
+
+## Performance
 I prepared a small benchmark, this is an app with 10 000 buttons that calculate clicks.
 You can find this in the [folder](https://github.com/d8corp/innet/tree/main/docs) and check by self.
 #### [React](https://d8corp.github.io/innet/react/)
@@ -721,7 +736,8 @@ You can find this in the [folder](https://github.com/d8corp/innet/tree/main/docs
 [![svelte](https://d8corp.github.io/innet/results/svelte.png)](https://d8corp.github.io/innet/svelte/)
 #### [innet](https://d8corp.github.io/innet/innet/)
 [![innet](https://d8corp.github.io/innet/results/innet.png)](https://d8corp.github.io/innet/innet/)
-### Best Practices
+
+## Best Practices
 Use [@innet/for](https://github.com/d8corp/innet-for) plugin to render arrays or any iterable object.
 ```typescript jsx
 import innet from 'innet'
@@ -739,11 +755,9 @@ innet((
   </for>
 ), undefined, {for: fp})
 ```
-### Issues
+
+## Issues
 Now we have Document Fragment dissolution issue (so you can find comments in the DOM).
 
 If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet/issues).  
-[![issues](https://img.shields.io/github/issues-raw/d8corp/innet)](https://github.com/d8corp/innet/issues)  
-> ---
-[![stars](https://img.shields.io/github/stars/d8corp/innet?style=social)](https://github.com/d8corp/innet/stargazers)
-[![watchers](https://img.shields.io/github/watchers/d8corp/innet?style=social)](https://github.com/d8corp/innet/watchers)
+[![issues](https://img.shields.io/github/issues-raw/d8corp/innet)](https://github.com/d8corp/innet/issues)
