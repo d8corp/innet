@@ -41,7 +41,7 @@ Or you can include the scripts into the `head`.
 
 ## Framework
 [innet](#) is a **library**.  
-You can include it into any project and start using without preprocessing and limits.
+You can include it into any project and start using without rocket science.
 
 [innetjs](https://www.npmjs.com/package/innetjs) is a **framework**.  
 Run the next commands, and get all you need to develop with
