@@ -243,6 +243,7 @@ You will get.
   Hello, World!
 </div>
 ```
+
 ### Component
 Component is a `class` which has `render` method, the method should return `Content`.
 ```javascript
@@ -282,6 +283,7 @@ class MyComponent extends Component {
   }
 }
 ```
+
 ## State Management
 `innet` uses [watch-state](https://www.npmjs.com/package/watch-state) for the state management.
 `watch-state` was specially developed for `innet`.
@@ -296,6 +298,7 @@ With the boilerplate:
 import {State} from 'watch-state'
 // const {State} = require('watch-state')
 ```
+
 ### Props Watcher
 Use a function as a props watcher.
 ```javascript
@@ -314,6 +317,7 @@ innet({
   children: ['Click Me']
 })
 ```
+
 ### Content Watcher
 Use a function as a `Content`.
 ```javascript
@@ -421,6 +425,7 @@ innet([
   {type: Color}
 ])
 ```
+
 ## Life Cycle
 Each `Template` and `Component` renders only once. They have 3 steps of life cycle:
 - **render** (DOM elements are not created)
@@ -454,33 +459,7 @@ class Test {
 
 innet(() => show.value ? {type: Test} : undefined)
 ```
-You can use `onMounted` and `onDestructor` from `innet` to get the same effect with `Template`.
-```javascript
-import {onMounted, onDestructor} from 'innet'
-import {State} from 'watch-state'
 
-const show = new State(true)
-
-function Test () {
-  onMounted(() => {
-    console.log(document.getElementById('test'))
-  })
-  onDestructor(() => console.log('destructor'))
-  
-  return {
-    type: 'button',
-    props: {
-      id: 'test',
-      onclick () {
-        show.value = false
-      }
-    },
-    children: ['click me']
-  }
-}
-
-innet(() => show.value ? {type: Test} : undefined)
-```
 ## Ref
 You can get an `HTML Element` from `JSX Element` by `ref` prop and `Ref` class from `innet`.
 ```javascript
