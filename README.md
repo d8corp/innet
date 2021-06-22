@@ -199,7 +199,7 @@ If you click on the button, you get "Hello, World" popup message.
 
 `type` can be a `Template`, a `Component` or a `string` from `plugins`.
 
-#### Template
+### Template
 Template is a function that should return Content.
 ```typescript jsx
 function Page () {
@@ -243,7 +243,7 @@ You will get.
   Hello, World!
 </div>
 ```
-#### Component
+### Component
 Component is a `class` which has `render` method, the method should return `Content`.
 ```javascript
 class MyComponent {
