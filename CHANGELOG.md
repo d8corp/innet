@@ -1,4 +1,6 @@
 # Changelog
+### v0.2.3 [![23.06.2021](https://img.shields.io/date/1624455162)](https://github.com/d8corp/watch-state/tree/v0.2.3)
+- improved `Context` types
 ### v0.2.2 [![22.06.2021](https://img.shields.io/date/1624312377)](https://github.com/d8corp/watch-state/tree/v0.2.2)
 - improved `Component` interface
 ### v0.2.1 [![17.06.2021](https://img.shields.io/date/1623917057)](https://github.com/d8corp/watch-state/tree/v0.2.1)

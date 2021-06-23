@@ -1,14 +1,25 @@
 [![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
 
 # &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; innet
-[![NPM](https://img.shields.io/npm/v/innet.svg)](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
+[![NPM](https://img.shields.io/npm/v/innet.svg)](https://www.npmjs.com/package/innet)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
-[![downloads](https://img.shields.io/npm/dm/innet.svg)](https://www.npmjs.com/package/innet)
+[![downloads](https://img.shields.io/npm/dm/innet.svg)](https://snyk.io/advisor/npm-package/innet)
 [![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
 [![tests](https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
 
-**innet** is a view library with no virtual DOM rendering.  
-It gives more performance and less RAM using.
+**innet** is a library for web application building with no virtual DOM rendering,
+that gives more performance and less RAM using.
+
+This is a light library, use it even on small projects.
+But the same time this is a powerful library,
+many modern features are available to use like:
+component approach, state management, context, fragment, portals, etc.
+
+[CHANGELOG](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
+
+[![stars](https://img.shields.io/github/stars/d8corp/innet?style=social)](https://github.com/d8corp/innet/stargazers)
+[![watchers](https://img.shields.io/github/watchers/d8corp/innet?style=social)](https://github.com/d8corp/innet/watchers)
+
 ## Installation
 npm
 ```bash
@@ -30,7 +41,7 @@ Or you can include the scripts into the `head`.
 
 ## Framework
 [innet](#) is a **library**.  
-You can include it into any project and start using without preprocessing and limits.
+You can include it into any project and start using without rocket science.
 
 [innetjs](https://www.npmjs.com/package/innetjs) is a **framework**.  
 Run the next commands, and get all you need to develop with
@@ -188,7 +199,7 @@ If you click on the button, you get "Hello, World" popup message.
 
 `type` can be a `Template`, a `Component` or a `string` from `plugins`.
 
-#### Template
+### Template
 Template is a function that should return Content.
 ```typescript jsx
 function Page () {
@@ -232,7 +243,8 @@ You will get.
   Hello, World!
 </div>
 ```
-#### Component
+
+### Component
 Component is a `class` which has `render` method, the method should return `Content`.
 ```javascript
 class MyComponent {
@@ -271,6 +283,7 @@ class MyComponent extends Component {
   }
 }
 ```
+
 ## State Management
 `innet` uses [watch-state](https://www.npmjs.com/package/watch-state) for the state management.
 `watch-state` was specially developed for `innet`.
@@ -285,6 +298,7 @@ With the boilerplate:
 import {State} from 'watch-state'
 // const {State} = require('watch-state')
 ```
+
 ### Props Watcher
 Use a function as a props watcher.
 ```javascript
@@ -303,6 +317,7 @@ innet({
   children: ['Click Me']
 })
 ```
+
 ### Content Watcher
 Use a function as a `Content`.
 ```javascript
@@ -410,6 +425,7 @@ innet([
   {type: Color}
 ])
 ```
+
 ## Life Cycle
 Each `Template` and `Component` renders only once. They have 3 steps of life cycle:
 - **render** (DOM elements are not created)
@@ -443,33 +459,7 @@ class Test {
 
 innet(() => show.value ? {type: Test} : undefined)
 ```
-You can use `onMounted` and `onDestructor` from `innet` to get the same effect with `Template`.
-```javascript
-import {onMounted, onDestructor} from 'innet'
-import {State} from 'watch-state'
 
-const show = new State(true)
-
-function Test () {
-  onMounted(() => {
-    console.log(document.getElementById('test'))
-  })
-  onDestructor(() => console.log('destructor'))
-  
-  return {
-    type: 'button',
-    props: {
-      id: 'test',
-      onclick () {
-        show.value = false
-      }
-    },
-    children: ['click me']
-  }
-}
-
-innet(() => show.value ? {type: Test} : undefined)
-```
 ## Ref
 You can get an `HTML Element` from `JSX Element` by `ref` prop and `Ref` class from `innet`.
 ```javascript
