@@ -1,6 +1,6 @@
 {
   "name": "innet",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "View Framework",
   "main": "index.js",
   "module": "index.es6.js",
