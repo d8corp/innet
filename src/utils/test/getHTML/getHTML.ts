@@ -1,8 +1,8 @@
-export function getHTML (element) {
+export function getHTML (element, showComments?: boolean) {
   if (element instanceof DocumentFragment) {
     let result = ''
     element.childNodes.forEach(node => {
-      result += getHTML(node)
+      result += getHTML(node, showComments)
     })
     return result
   }
@@ -10,10 +10,11 @@ export function getHTML (element) {
     return element.nodeValue
   }
   if (element instanceof HTMLElement) {
-    return element.outerHTML
+    const html = element.outerHTML
+    return showComments ? html : html.replace(/(?=<!--)([\s\S]*?)-->/g, '')
   }
   if (element instanceof Comment) {
-    return `<!--${element.textContent}-->`
+    return showComments ? `<!--${element.textContent}-->` : ''
   }
   return element
 }

@@ -47,14 +47,14 @@ describe('Context', () => {
       </Theme>
     )
 
-    expect(getHTML(element1)).toBe('<!---->')
-    expect(getHTML(element2)).toBe('<!---->')
-    expect(getHTML(element3)).toBe('<!---->&<!---->')
+    expect(getHTML(element1)).toBe('')
+    expect(getHTML(element2)).toBe('')
+    expect(getHTML(element3)).toBe('&')
 
     show.value = true
 
-    expect(getHTML(element1)).toBe('red<!---->')
-    expect(getHTML(element2)).toBe('black<!---->')
-    expect(getHTML(element3)).toBe('black<!---->&white<!---->')
+    expect(getHTML(element1)).toBe('red')
+    expect(getHTML(element2)).toBe('black')
+    expect(getHTML(element3)).toBe('black&white')
   })
 })

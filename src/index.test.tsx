@@ -281,7 +281,8 @@ describe('innet', () => {
             children: [testFunction]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div><!--testFunction--></div>')
+          expect(getHTML(element)).toBe('<div></div>')
+          expect(getHTML(element, true)).toBe('<div><!--testFunction--></div>')
         })
         test('string', () => {
           const func = () => 'test'
@@ -295,7 +296,7 @@ describe('innet', () => {
             children: [func]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div>test<!--func--></div>')
+          expect(getHTML(element)).toBe('<div>test</div>')
         })
         test('number', () => {
           const func = () => 13
@@ -309,7 +310,7 @@ describe('innet', () => {
             children: [func]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div>13<!--func--></div>')
+          expect(getHTML(element)).toBe('<div>13</div>')
         })
         test('NaN', () => {
           const func = () => NaN
@@ -323,7 +324,7 @@ describe('innet', () => {
             children: [func]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div>NaN<!--func--></div>')
+          expect(getHTML(element)).toBe('<div>NaN</div>')
         })
         test('null', () => {
           const func = () => null
@@ -337,7 +338,7 @@ describe('innet', () => {
             children: [func]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div><!--func--></div>')
+          expect(getHTML(element)).toBe('<div></div>')
         })
         test('Symbol', () => {
           const func = () => Symbol()
@@ -351,7 +352,7 @@ describe('innet', () => {
             children: [func]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div><!--func--></div>')
+          expect(getHTML(element)).toBe('<div></div>')
         })
         test('boolean', () => {
           const func1 = () => true
@@ -367,7 +368,7 @@ describe('innet', () => {
             children: [func1, func2]
           })
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div><!--func1--><!--func2--></div>')
+          expect(getHTML(element)).toBe('<div></div>')
         })
         test('function', () => {
           const div = (
@@ -376,7 +377,7 @@ describe('innet', () => {
             </div>
           )
           const element = renderElement(div)
-          expect(getHTML(element)).toBe('<div>test<!----><!----><!----><!----></div>')
+          expect(getHTML(element)).toBe('<div>test</div>')
         })
         describe('element', () => {
           test('empty', () => {
@@ -391,7 +392,7 @@ describe('innet', () => {
               children: [func]
             })
             const element = renderElement(div)
-            expect(getHTML(element)).toBe('<div><div></div><!--func--></div>')
+            expect(getHTML(element)).toBe('<div><div></div></div>')
           })
           test('props', () => {
             const func = () => <div id='test1' />
@@ -405,7 +406,7 @@ describe('innet', () => {
               children: [func]
             })
             const element = renderElement(div)
-            expect(getHTML(element)).toBe('<div><div id="test1"></div><!--func--></div>')
+            expect(getHTML(element)).toBe('<div><div id="test1"></div></div>')
           })
           test('children', () => {
             const func = () => <div>test</div>
@@ -419,7 +420,7 @@ describe('innet', () => {
               children: [func]
             })
             const element = renderElement(div)
-            expect(getHTML(element)).toBe('<div><div>test</div><!--func--></div>')
+            expect(getHTML(element)).toBe('<div><div>test</div></div>')
           })
         })
         describe('array', () => {
@@ -435,7 +436,7 @@ describe('innet', () => {
               children: [func]
             })
             const element = renderElement(div)
-            expect(getHTML(element)).toBe('<div><!--func--></div>')
+            expect(getHTML(element)).toBe('<div></div>')
           })
           test('strings', () => {
             const func = () => ['test1', 'test2']
@@ -449,7 +450,7 @@ describe('innet', () => {
               children: [func]
             })
             const element = renderElement(div)
-            expect(getHTML(element)).toBe('<div>test1test2<!--func--></div>')
+            expect(getHTML(element)).toBe('<div>test1test2</div>')
           })
         })
       })
@@ -458,41 +459,41 @@ describe('innet', () => {
           test('simple outside', () => {
             const show = new State(false)
             const element = renderElement(() => show.value && <div />)
-            expect(getHTML(element)).toBe('<!---->')
+            expect(getHTML(element)).toBe('')
             show.value = true
-            expect(getHTML(element)).toBe('<div></div><!---->')
+            expect(getHTML(element)).toBe('<div></div>')
           })
           test('simple inside', () => {
             const show = new State(false)
             const element = renderElement(<div>{() => show.value && 'show'}</div>)
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
             show.value = true
-            expect(getHTML(element)).toBe('<div>show<!----></div>')
+            expect(getHTML(element)).toBe('<div>show</div>')
             show.value = false
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
           })
           test('function', () => {
             const show = new State(false)
             const count = new State(0)
             const element = renderElement(<div>{() => show.value && (() => count.value)}</div>)
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
             show.value = true
-            expect(getHTML(element)).toBe('<div>0<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>0</div>')
             count.value++
-            expect(getHTML(element)).toBe('<div>1<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>1</div>')
             count.value++
-            expect(getHTML(element)).toBe('<div>2<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>2</div>')
             show.value = false
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
           })
           test('array', () => {
             const show = new State(false)
             const element = renderElement(<div>{() => show.value && ['test1', 'test2']}</div>)
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
             show.value = true
-            expect(getHTML(element)).toBe('<div>test1test2<!----></div>')
+            expect(getHTML(element)).toBe('<div>test1test2</div>')
             show.value = false
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
           })
           test('array of state', () => {
             let count = 0
@@ -504,19 +505,19 @@ describe('innet', () => {
               return show.value && [() => count1.value, '|', () => count2.value]
             }}</div>)
             expect(count).toBe(1)
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
             show.value = true
             expect(count).toBe(2)
-            expect(getHTML(element)).toBe('<div>0<!---->|0<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>0|0</div>')
             count1.value = 1
             expect(count).toBe(2)
-            expect(getHTML(element)).toBe('<div>1<!---->|0<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>1|0</div>')
             count2.value = 2
             expect(count).toBe(2)
-            expect(getHTML(element)).toBe('<div>1<!---->|2<!----><!----></div>')
+            expect(getHTML(element)).toBe('<div>1|2</div>')
             show.value = false
             expect(count).toBe(3)
-            expect(getHTML(element)).toBe('<div><!----></div>')
+            expect(getHTML(element)).toBe('<div></div>')
           })
         })
         describe('props', () => {
@@ -567,9 +568,9 @@ describe('innet', () => {
       test('function', () => {
         const name = new State('Mike')
         const element = renderElement(<>{() => name.value}</>)
-        expect(getHTML(element)).toBe('Mike<!---->')
+        expect(getHTML(element)).toBe('Mike')
         name.value = 'Test'
-        expect(getHTML(element)).toBe('Test<!---->')
+        expect(getHTML(element)).toBe('Test')
       })
     })
   })
@@ -628,12 +629,12 @@ describe('innet', () => {
       const element1 = renderElement(<Test />)
       const element2 = renderElement(<Test show />)
 
-      expect(getHTML(element1)).toBe('<!---->')
-      expect(getHTML(element2)).toBe('<button>hide</button><!---->')
+      expect(getHTML(element1)).toBe('')
+      expect(getHTML(element2)).toBe('<button>hide</button>')
 
       element2.querySelector('button').click()
 
-      expect(getHTML(element2)).toBe('<!---->')
+      expect(getHTML(element2)).toBe('')
     })
     test('state outside', () => {
       const showState = new State(false)
@@ -643,13 +644,13 @@ describe('innet', () => {
       const element1 = renderElement(<Test show={() => showState.value} />)
       const element2 = renderElement(<Test show={() => !showState.value} />)
 
-      expect(getHTML(element1)).toBe('<!---->')
-      expect(getHTML(element2)).toBe('test<!---->')
+      expect(getHTML(element1)).toBe('')
+      expect(getHTML(element2)).toBe('test')
 
       showState.value = true
 
-      expect(getHTML(element1)).toBe('test<!---->')
-      expect(getHTML(element2)).toBe('<!---->')
+      expect(getHTML(element1)).toBe('test')
+      expect(getHTML(element2)).toBe('')
     })
   })
   describe('Component', () => {
@@ -717,12 +718,12 @@ describe('innet', () => {
       const element1 = renderElement(<Test />)
       const element2 = renderElement(<Test show />)
 
-      expect(getHTML(element1)).toBe('<!---->')
-      expect(getHTML(element2)).toBe('<button>hide</button><!---->')
+      expect(getHTML(element1)).toBe('')
+      expect(getHTML(element2)).toBe('<button>hide</button>')
 
       element2.querySelector('button').click()
 
-      expect(getHTML(element2)).toBe('<!---->')
+      expect(getHTML(element2)).toBe('')
     })
     test('state outside', () => {
       class Test implements Component {
@@ -734,13 +735,13 @@ describe('innet', () => {
       const element1 = renderElement(<Test show={() => showState.value} />)
       const element2 = renderElement(<Test show={() => !showState.value} />)
 
-      expect(getHTML(element1)).toBe('<!---->')
-      expect(getHTML(element2)).toBe('test<!---->')
+      expect(getHTML(element1)).toBe('')
+      expect(getHTML(element2)).toBe('test')
 
       showState.value = true
 
-      expect(getHTML(element1)).toBe('test<!---->')
-      expect(getHTML(element2)).toBe('<!---->')
+      expect(getHTML(element1)).toBe('test')
+      expect(getHTML(element2)).toBe('')
     })
   })
   describe('destructor', () => {
@@ -756,23 +757,23 @@ describe('innet', () => {
         }
       }
       const element = renderElement(() => show.value && <Test />)
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(count).toBe(0)
 
       show.value = true
-      expect(getHTML(element)).toBe('foo<!---->')
+      expect(getHTML(element)).toBe('foo')
       expect(count).toBe(0)
 
       show.value = false
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(count).toBe(1)
 
       show.value = true
-      expect(getHTML(element)).toBe('foo<!---->')
+      expect(getHTML(element)).toBe('foo')
       expect(count).toBe(1)
 
       show.value = false
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(count).toBe(2)
     })
   })
@@ -789,19 +790,19 @@ describe('innet', () => {
         }
       }
       const element = renderElement(() => show.value && <Test />)
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(count).toBe(0)
 
       show.value = true
-      expect(getHTML(element)).toBe('foo<!---->')
+      expect(getHTML(element)).toBe('foo')
       expect(count).toBe(1)
 
       show.value = false
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(count).toBe(1)
 
       show.value = true
-      expect(getHTML(element)).toBe('foo<!---->')
+      expect(getHTML(element)).toBe('foo')
       expect(count).toBe(2)
     })
     test('ref', () => {
@@ -817,20 +818,20 @@ describe('innet', () => {
         }
       }
       const element = renderElement(() => show.value && <Test />)
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(log.length).toBe(0)
 
       show.value = true
-      expect(getHTML(element)).toBe('<div></div><!---->')
+      expect(getHTML(element)).toBe('<div></div>')
       expect(log.length).toBe(1)
       expect(log[0]).toBe(element.querySelector('div'))
 
       show.value = false
-      expect(getHTML(element)).toBe('<!---->')
+      expect(getHTML(element)).toBe('')
       expect(log.length).toBe(1)
 
       show.value = true
-      expect(getHTML(element)).toBe('<div></div><!---->')
+      expect(getHTML(element)).toBe('<div></div>')
       expect(log.length).toBe(2)
       expect(log[1]).toBe(element.querySelector('div'))
     })
