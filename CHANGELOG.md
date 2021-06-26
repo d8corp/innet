@@ -1,4 +1,6 @@
 # Changelog
+### v0.2.6 [![26.06.2021](https://img.shields.io/date/1624718255)](https://github.com/d8corp/watch-state/tree/v0.2.6)
+- updated [watch-state](https://www.npmjs.com/package/watch-state)
 ### v0.2.5 [![26.06.2021](https://img.shields.io/date/1624700665)](https://github.com/d8corp/watch-state/tree/v0.2.5)
 - updated [watch-state](https://www.npmjs.com/package/watch-state)
 - changed readme
