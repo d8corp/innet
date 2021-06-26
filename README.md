@@ -23,7 +23,7 @@
     <img src="https://img.shields.io/npm/l/innet" alt="innet license">
   </a>
   <a href="https://changelogs.xyz/innet" target="_blank">
-    <img src="https://img.shields.io/badge/Changelog-➤-brightgreen" alt="innet minzipped size">
+    <img src="https://img.shields.io/badge/Changelog-⋮-brightgreen" alt="innet minzipped size">
   </a>
   <a href="https://d8corp.github.io/innet/coverage/lcov-report" target="_blank">
     <img src="https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg" alt="innet test coverage">
