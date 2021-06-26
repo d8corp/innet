@@ -1,11 +1,35 @@
-[![NPM](https://raw.githubusercontent.com/d8corp/innet/main/logo.svg)](https://github.com/d8corp/innet)
+<br>
+<p align="center">
+  <a href="https://github.com/d8corp/innet">
+    <img width="200" height="200" src="https://raw.githubusercontent.com/d8corp/innet/main/logo.svg" alt="innet logo by Mikhail Lysikov">
+  </a>
+</p>
 
-# &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; innet
-[![NPM](https://img.shields.io/npm/v/innet.svg)](https://www.npmjs.com/package/innet)
-[![minzipped size](https://img.shields.io/bundlephobia/minzip/innet)](https://bundlephobia.com/result?p=innet)
-[![downloads](https://img.shields.io/npm/dm/innet.svg)](https://snyk.io/advisor/npm-package/innet)
-[![license](https://img.shields.io/npm/l/innet)](https://github.com/d8corp/innet/blob/master/LICENSE)
-[![tests](https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg)](https://d8corp.github.io/innet/coverage/lcov-report/)  
+<h1 align="center">innet</h1>
+
+<p align="center">CANT inc. web application builder.</p>
+
+<div align="center">
+  <a href="https://www.npmjs.com/package/innet" target="_blank">
+    <img src="https://img.shields.io/npm/v/innet.svg" alt="innet npm">
+  </a>
+  <a href="https://bundlephobia.com/result?p=innet" target="_blank">
+    <img src="https://img.shields.io/bundlephobia/minzip/innet" alt="innet minzipped size">
+  </a>
+  <a href="https://www.npmtrends.com/innet" target="_blank">
+    <img src="https://img.shields.io/npm/dm/innet.svg" alt="innet minzipped size">
+  </a>
+  <a href="https://github.com/d8corp/innet/blob/master/LICENSE" target="_blank">
+    <img src="https://img.shields.io/npm/l/innet" alt="innet license">
+  </a>
+  <a href="https://changelogs.xyz/innet" target="_blank">
+    <img src="https://img.shields.io/badge/Changelog-➤-brightgreen" alt="innet minzipped size">
+  </a>
+  <a href="https://d8corp.github.io/innet/coverage/lcov-report" target="_blank">
+    <img src="https://github.com/d8corp/innet/actions/workflows/tests.yml/badge.svg" alt="innet test coverage">
+  </a>
+</div>
+<br>
 
 **innet** is a library for web application building with no virtual DOM rendering,
 that gives more performance and less RAM using.
@@ -15,12 +39,10 @@ But the same time this is a powerful library,
 many modern features are available to use like:
 component approach, state management, context, fragment, portals, etc.
 
-[CHANGELOG](https://github.com/d8corp/innet/blob/master/CHANGELOG.md)
-
 [![stars](https://img.shields.io/github/stars/d8corp/innet?style=social)](https://github.com/d8corp/innet/stargazers)
 [![watchers](https://img.shields.io/github/watchers/d8corp/innet?style=social)](https://github.com/d8corp/innet/watchers)
 
-## Installation
+## Install
 npm
 ```bash
 npm i innet
