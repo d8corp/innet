@@ -771,5 +771,6 @@ innet((
 ## Issues
 Now we have Document Fragment dissolution issue (so you can find comments in the DOM).
 
-If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet/issues).  
+If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet/issues).
+
 [![issues](https://img.shields.io/github/issues-raw/d8corp/innet)](https://github.com/d8corp/innet/issues)
