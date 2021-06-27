@@ -1,5 +1,5 @@
 module.exports = {
-  preset: 'ts-jest',
+  preset: 'innet-jest',
   testEnvironment: 'jsdom',
   setupFiles: ['core-js'],
   testPathIgnorePatterns: ['.*\.speed\.test\.ts$'],

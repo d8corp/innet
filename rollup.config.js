@@ -1,7 +1,6 @@
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import {terser} from 'rollup-plugin-terser'
-import commonjs from '@rollup/plugin-commonjs'
 import glob from 'glob'
 
 const input = glob.sync('{src/index.ts,src/**/index.ts}')
@@ -18,14 +17,6 @@ export default [{
     typescript({
       rollupCommonJSResolveHack: false,
       clean: true,
-      tsconfigOverride: {
-        compilerOptions: {
-          module: 'esnext'
-        },
-        include: [
-          'index.ts'
-        ]
-      }
     })
   ]
 }, {
@@ -43,11 +34,7 @@ export default [{
       tsconfigOverride: {
         compilerOptions: {
           target: 'es6',
-          module: 'esnext'
-        },
-        include: [
-          'index.ts'
-        ]
+        }
       }
     })
   ]
@@ -60,18 +47,9 @@ export default [{
     plugins: [terser()]
   },
   plugins: [
-    commonjs(),
     typescript({
       rollupCommonJSResolveHack: false,
       clean: true,
-      tsconfigOverride: {
-        compilerOptions: {
-          module: 'esnext'
-        },
-        include: [
-          'index.ts'
-        ]
-      }
     })
   ]
 }]

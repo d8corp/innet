@@ -254,19 +254,19 @@ describe('innet', () => {
       const element = renderElement(div)
       expect(getHTML(element)).toBe('<div></div>')
     })
-    test('children array', () => {
-      const div = (
-        <div>
-          {['test1', ', ', 'test2']}
-        </div>
-      )
-      expect(div).toEqual({
-        type: 'div',
-        children: ['test1', ', ', 'test2']
-      })
-      const element = renderElement(div)
-      expect(getHTML(element)).toBe('<div>test1, test2</div>')
-    })
+    // test('children array', () => {
+    //   const div = (
+    //     <div>
+    //       {['test1', ', ', 'test2']}
+    //     </div>
+    //   )
+    //   expect(div).toEqual({
+    //     type: 'div',
+    //     children: ['test1', ', ', 'test2']
+    //   })
+    //   const element = renderElement(div)
+    //   expect(getHTML(element)).toBe('<div>test1, test2</div>')
+    // })
     describe('function', () => {
       describe('stateless', () => {
         test('empty', () => {
