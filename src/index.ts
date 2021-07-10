@@ -1,4 +1,4 @@
-import {Watch} from 'watch-state'
+import {Watch, scope as wsScope} from 'watch-state'
 
 import scope from './scope'
 import {ContentElements, append, clear} from './utils/dom'
@@ -186,7 +186,7 @@ export function innet<C extends Content, P extends Parent = Parent> (content: C,
           scope.currentPlugins = plugins
           const component = new (type as any)(props, children)
           if ('destructor' in component) {
-            Watch.activeWatcher?.onDestroy(() => component.destructor())
+            wsScope.activeWatcher?.onDestroy(() => component.destructor())
           }
           innet(component.render(props, children), parent, plugins, defaultPlugin)
           if ('mounted' in component) {
