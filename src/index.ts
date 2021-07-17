@@ -182,11 +182,13 @@ export function innet<C extends Content, P extends Parent = Parent> (content: C,
         }
       } else if (typeof type === 'function') {
         const prevPlugins = scope.currentPlugins
+        const watcher = wsScope.activeWatcher
+        wsScope.activeWatcher = undefined
         if (isComponent(type)) {
           scope.currentPlugins = plugins
           const component = new (type as any)(props, children)
           if ('destructor' in component) {
-            wsScope.activeWatcher?.onDestroy(() => component.destructor())
+            watcher?.onDestroy(() => component.destructor())
           }
           innet(component.render(props, children), parent, plugins, defaultPlugin)
           if ('mounted' in component) {
@@ -200,6 +202,7 @@ export function innet<C extends Content, P extends Parent = Parent> (content: C,
           currentMounted.forEach(mounted => mounted())
           currentMounted = prevMounted
         }
+        wsScope.activeWatcher = watcher
         scope.currentPlugins = prevPlugins
       }
     }

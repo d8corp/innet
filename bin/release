@@ -42,18 +42,18 @@ async function removeFiles () {
 }
 async function copyReadme () {
   consoleStart('copying readme')
-  await getPromise(resolve => fs.copyFile(rootDir + '/README.md', releaseDir + '/README.md', 'utf8', resolve))
+  await getPromise(resolve => fs.copyFile(rootDir + '/README.md', releaseDir + '/README.md', undefined, resolve))
   consoleEnd('copying readme')
 }
 async function copyLicense () {
   consoleStart('copying license')
-  await getPromise(resolve => fs.copyFile(rootDir + '/LICENSE', releaseDir + '/LICENSE', 'utf8', resolve))
+  await getPromise(resolve => fs.copyFile(rootDir + '/LICENSE', releaseDir + '/LICENSE', undefined, resolve))
   consoleEnd('copying license')
 }
 async function copyBin () {
   consoleStart('copying innet')
   await getPromise(resolve => fs.mkdir(releaseDir + '/bin', resolve))
-  await getPromise(resolve => fs.copyFile(rootDir + '/bin/innet', releaseDir + '/bin/innet', 'utf8', resolve))
+  await getPromise(resolve => fs.copyFile(rootDir + '/bin/innet', releaseDir + '/bin/innet', undefined, resolve))
   consoleEnd('copying innet')
 }
 async function copyPackage () {
