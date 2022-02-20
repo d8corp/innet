@@ -1,7 +1,7 @@
 {
   "name": "innet",
   "version": "0.3.0",
-  "description": "View Framework",
+  "description": "CANT inc. application build ecosystem.",
   "main": "index.js",
   "module": "index.es6.js",
   "jsnext:main": "index.es6.js",
@@ -11,17 +11,6 @@
     "url": "https://github.com/d8corp/innet.git"
   },
   "keywords": [
-    "watch",
-    "state",
-    "stateful",
-    "reaction",
-    "reactions",
-    "react",
-    "reactive",
-    "observe",
-    "observable",
-    "framework",
-    "view",
     "front-end"
   ],
   "author": "Mikhail Lysikov <d8corp@mail.ru>",
@@ -30,9 +19,6 @@
     "url": "https://github.com/d8corp/innet/issues"
   },
   "homepage": "https://github.com/d8corp/innet",
-  "dependencies": {
-    "watch-state": "^3.3.3"
-  },
   "bin": {
     "innet": "./bin/innet"
   }
