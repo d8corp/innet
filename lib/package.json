@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/d8corp/innet",
   "bin": {
-    "innet": "./bin/innet"
+    "innet": "bin/innet"
   }
 }

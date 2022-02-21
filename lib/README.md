@@ -32,7 +32,7 @@
 <br>
 
 ## Abstract
-The main mission is simplifying and standardizing application development.
+The main mission is simplifying and standardizing of application development.
 
 `innet` includes all the best features of famous libraries and frameworks.
 `innet` looks like all you've seen but at the same time it's completely different.
@@ -40,10 +40,10 @@ The main mission is simplifying and standardizing application development.
 This is a ready-mode solution, at last, going to be.
 `innet` provides you any tools you need to build any JavaScript application:
 
-- Web Site
-- API Server
-- Browser Plugin
-- Native Application
+- [x] API Server
+- [ ] Web Site
+- [ ] Browser Plugin
+- [ ] Native Application
 
 ### JSX Everywhere
 `JSX` provides the best experience of compositing and here you can take maximum of that.
@@ -90,7 +90,7 @@ Or you can include the script into the `head`.
 > You can start learning of `innet` from [@innet/dom](https://www.npmjs.com/package/@innet/dom), for the front-end side,
 > or [@innet/server](https://www.npmjs.com/package/@innet/server) for the back-end.
 
-`innet` is a function which gets 2 arguments.
+`innet` is a function which expects 2 required arguments.
 The first one is an application and the second one is a handler of the application.
 Like you can say **what** to do and **how**.
 ```typescript
@@ -102,14 +102,15 @@ import handler from './handler' // how to do
 innet(app, handler)
 ```
 
-`app` can be any type, but `handler` should be a `Handler` instance. You can create the handler with `createHandler` function.
+`app` can be `any` type, but `handler` should be a `Handler` instance.
+You can create the handler with `createHandler` function.
 ```typescript
 import { createHandler } from 'innet'
 
 export default createHandler([])
 ```
 
-By default, the handler does nothing, but you can set functionality by plugins.
+By default, the handler does nothing, but you can set any functionality by plugins.
 
 ```typescript
 const sum = () => ([a, b]) => a + b
@@ -146,7 +147,7 @@ function logger (): PluginHandler {
 `PluginHandler` is a function with the first argument equals a peace of application,
 the second is a next plugin runner and the last one is a handler.
 
-As another example, let's look at a plugin of `async` which allows promises handling.
+As another example, let's look at the plugin of `async` which allows promises handling.
 ```typescript
 import innet, { PluginHandler } from 'innet'
 
@@ -184,7 +185,7 @@ More plugins [here](https://www.npmjs.com/search?q=%40innet)
 
 ### Extend a handler
 You can extend a handler with `createHandler`,
-just provide to the second argument it.
+just provide the previous handler to the second argument.
 
 ```typescript
 const handler1 = createHandler([
