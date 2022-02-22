@@ -1,6 +1,6 @@
 {
   "name": "innet",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "CANT inc. application build ecosystem.",
   "main": "index.js",
   "module": "index.es6.js",
@@ -11,6 +11,8 @@
     "url": "https://github.com/d8corp/innet.git"
   },
   "keywords": [
+    "CANTinc.",
+    "ecosystem",
     "front-end"
   ],
   "author": "Mikhail Lysikov <d8corp@mail.ru>",

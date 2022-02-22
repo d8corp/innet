@@ -129,7 +129,7 @@ innet([1, 2], handler)
 ### Plugins
 A plugin is a function which runs during a handler creation and returns `PluginHandler`.
 
-For example here is a logger plugin
+For example, here is a logger plugin.
 ```typescript
 import { PluginHandler } from 'innet'
 
@@ -181,7 +181,23 @@ await result
 // > 'logger: app', 'test'
 ```
 
-More plugins [here](https://www.npmjs.com/search?q=%40innet)
+The order of the plugins is important.
+
+```typescript
+const app = new Promise(resolve => resolve('test'))
+
+const handler = createHandler([
+  async, // change order
+  logger,
+])
+// > 'logger: initialisation'
+
+const result = innet(app, handler)
+// nothing happens
+
+await result
+// > 'logger: app', 'test'
+```
 
 ### Extend a handler
 You can extend a handler with `createHandler`,
@@ -198,7 +214,8 @@ const handler2 = createHandler([
 ], handler1)
 ```
 
-Check out [@innet/utils](https://www.npmjs.com/package/@innet/utils), there you can find the most general plugins and utils.
+Check out [@innet/utils](https://www.npmjs.com/package/@innet/utils),
+there you can find the most general plugins and utils.
 
 ## Issues
 If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet/issues).
