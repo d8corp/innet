@@ -1,13 +1,14 @@
+export const PLUGINS = Symbol('Plugins')
+
 export interface Handler {
+  // eslint-disable-next-line no-use-before-define
   [PLUGINS]: PluginHandler[]
   [key: string]: any
 }
 
-export type Plugin = (handler: Handler) => PluginHandler
-export type PluginHandler = (app, next: Next, handler: Handler) => any
 export type Next = (app?, handler?: Handler, next?: Next) => any
-
-export const PLUGINS = Symbol('Plugins')
+export type PluginHandler = (app, next: Next, handler: Handler) => any
+export type Plugin = (handler: Handler) => PluginHandler
 
 export function createHandler <HI extends Handler, HO extends HI = HI> (plugins: Plugin[], extendHandler: HI = null): HO {
   const handler = Object.create(extendHandler)

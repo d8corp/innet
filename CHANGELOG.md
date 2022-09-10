@@ -2,6 +2,11 @@
 
 ## v1.0
 
+### v1.0.1 [![10.09.2022](https://img.shields.io/date/1662811375)](https://github.com/d8corp/watch-state/tree/v1.0.1)
+- update dependencies
+- add linter
+- update docs
+
 ### v1.0.0 [![22.02.2022](https://img.shields.io/date/1645516383)](https://github.com/d8corp/watch-state/tree/v1.0.0)
 - present `innet` as an ecosystem.
 

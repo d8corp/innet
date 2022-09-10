@@ -1,6 +1,6 @@
 {
   "name": "innet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CANT inc. application build ecosystem.",
   "main": "index.js",
   "module": "index.es6.js",
