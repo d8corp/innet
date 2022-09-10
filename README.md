@@ -32,38 +32,38 @@
 <br>
 
 ## Abstract
-The main mission is simplifying and standardizing of application development.
+The main mission is simplifying and standardizing application development.
 
 `innet` includes all the best features of famous libraries and frameworks.
 `innet` looks like all you've seen but at the same time it's completely different.
 `innet` is an ecosystem for JavaScript, but the same time it's just a function.
-This is a ready-mode solution, at last, going to be.
+This is an out-of-the-box solution, at least, going to be.
 `innet` provides you any tools you need to build any JavaScript application:
 
 - [x] API Server
-- [ ] Web Site
+- [x] Web Site
 - [ ] Browser Plugin
 - [ ] Native Application
 
 ### JSX Everywhere
-`JSX` provides the best experience of compositing and here you can take maximum of that.
+`JSX` provides you the maximum experience of aligning the code.
 `innet` includes `JSX` by default.
 Check [@innet/jsx](https://www.npmjs.com/package/@innet/jsx) to get more.
 
 > **YOU CAN USE `JSX` ON THE SERVER SIDE!**
 
 ### Split By Plugins
-Include only that code you need, whole functional split by plugins you can connect.
+Include only code you need, whole functional splits by plugins you can connect (disconnect) separately.
 From `refs`, `portals`, `context`, `life cycle`, `state management` on frontend side
 to `router`, `components`, `proxy`, `async`, `html` on server side and more.
 
-> **YOU CAN USE THE SAME PLUGINS ON BOTH SIDES!**
+> **YOU CAN USE SAME PLUGINS ON BOTH SIDES!**
 
 ### Components
-The component approach is a powerful technology `innet` supports.
+The component approach is a powerful technology, that `innet` supports.
 You can reuse a piece of an application, and that's awesome.
 
-> **YOU CAN USE THE SAME COMPONENTS ON BOTH SIDES!**
+> **YOU CAN USE SAME COMPONENTS ON BOTH SIDES!**
 
 There are a lot of features you can see below, welcome!
 
