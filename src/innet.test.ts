@@ -1,134 +1,122 @@
-import innet, { createHandler, PluginHandler } from './index'
+import innet, { createHandler, HandlerPlugin, NEXT, useApp, useHandler } from '.'
 
 describe('innet', () => {
   test('empty plugins', () => {
-    expect(innet(123, createHandler([]))).toBe(123)
+    innet(123, createHandler([]))
   })
   test('simple plugin', () => {
-    function sum (): PluginHandler {
-      return ([a, b]) => a + b
+    const log: any[] = []
+    function sum (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        if (Array.isArray(app)) {
+          const [a, b] = app
+          log.push(a + b)
+        }
+      }
     }
-    expect(innet([42, 13], createHandler([sum]))).toBe(55)
+    innet([42, 13], createHandler([sum]))
+    expect(log.length).toBe(1)
+    expect(log[0]).toBe(55)
   })
   test('double plugin', () => {
-    function sum (): PluginHandler {
-      return ([a, b]) => a + b
+    const log: any = []
+    function sum (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        if (Array.isArray(app)) {
+          const [a, b] = app
+          log.push(a + b)
+        }
+      }
     }
-    function quad (): PluginHandler {
-      return (t, next) => next(t * t)
+
+    function quad (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        if (typeof app === 'number') {
+          log.push(app * app)
+        }
+      }
     }
-    expect(innet([42, 13], createHandler([sum, sum]))).toBe(55)
-    expect(innet(2, createHandler([quad, quad]))).toBe(16)
+
+    innet([42, 13], createHandler([sum, sum, quad]))
+    innet(2, createHandler([quad, quad, sum]))
+
+    expect(log.length).toBe(2)
+    expect(log[0]).toBe(55)
+    expect(log[1]).toBe(4)
   })
   test('couple of plugins', () => {
-    function sum (): PluginHandler {
-      return (target, next) => {
-        if (Array.isArray(target)) {
-          return target[0] + target[1]
-        }
-        return next()
+    const log: any = []
+
+    function sum (): HandlerPlugin {
+      return () => {
+        const target = useApp()
+        if (!Array.isArray(target)) return NEXT
+        log.push(target[0] + target[1])
       }
     }
 
-    function quad () {
-      return (target, next) => {
-        if (typeof target === 'number') {
-          return target * target
-        }
-        return next()
-      }
-    }
-
-    const handler = createHandler([sum, quad])
-
-    expect(innet([42, 13], handler)).toBe(55)
-    expect(innet(8, handler)).toBe(64)
-  })
-  test('async plugins', async () => {
-    function sum (): PluginHandler {
-      return async (target, next) => {
-        await new Promise(resolve => setTimeout(resolve, 100))
-        if (Array.isArray(target)) {
-          return target[0] + target[1]
-        }
-        return next()
-      }
-    }
-
-    function quad (): PluginHandler {
-      return async (target, next) => {
-        if (typeof target === 'number') {
-          return target * target
-        }
-        return next()
+    function quad (): HandlerPlugin {
+      return () => {
+        const target = useApp()
+        if (typeof target !== 'number') return NEXT
+        log.push(target * target)
       }
     }
 
     const handler = createHandler([sum, quad])
-
-    expect(await innet([42, 13], handler)).toBe(55)
-    expect(await innet(8, handler)).toBe(64)
-  })
-  test('change target', () => {
-    function sum (): PluginHandler {
-      return (target, next) => {
-        if (Array.isArray(target)) {
-          return next(target[0] + target[1])
-        }
-        return next()
-      }
-    }
-
-    function quad (): PluginHandler {
-      return (target, next) => {
-        if (typeof target === 'number') {
-          return next(target * target)
-        }
-        return next()
-      }
-    }
-
-    expect(innet([42, 13], createHandler([sum, quad]))).toBe(3025)
-    expect(innet([42, 13], createHandler([quad, sum]))).toBe(55)
-    expect(innet(8, createHandler([quad, sum]))).toBe(64)
-    expect(innet(8, createHandler([sum, quad]))).toBe(64)
-  })
-  test('logger', async () => {
-    const log = []
-
-    function logger (): PluginHandler {
-      log.push('initialisation')
-
-      return (app, next) => {
-        log.push(app)
-
-        return next()
-      }
-    }
-
-    function async (): PluginHandler {
-      return (app, next, handler) =>
-        app instanceof Promise
-          ? app.then(data => innet(data, handler))
-          : next()
-    }
-
-    const handler = createHandler([logger, async])
-
-    expect(log.length).toBe(1)
-    expect(log[0]).toBe('initialisation')
-
-    const app = new Promise(resolve => resolve('test'))
-
-    const result = innet(app, handler)
-
-    expect(result).toBeInstanceOf(Promise)
+    innet([42, 13], handler)
+    innet(8, handler)
     expect(log.length).toBe(2)
-    expect(log[1]).toBe(app)
+    expect(log[0]).toBe(55)
+    expect(log[1]).toBe(64)
+  })
+  test('plugins order-less', () => {
+    const log: any[] = []
+    const ONCE_SUM = Symbol('ONCE_SUM')
+    const ONCE_QUAD = Symbol('ONCE_QUAD')
 
-    await result
+    function logPlugin (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        log.push(app)
+      }
+    }
 
-    expect(log.length).toBe(3)
-    expect(log[2]).toBe('test')
+    function sum (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        const handler = useHandler()
+        if (!Array.isArray(app) || handler[ONCE_SUM]) return NEXT
+
+        const nextHandler = Object.create(handler)
+        nextHandler[ONCE_SUM] = true
+        innet(app[0] + app[1], nextHandler)
+      }
+    }
+
+    function quad (): HandlerPlugin {
+      return () => {
+        const app = useApp()
+        const handler = useHandler()
+        if (typeof app !== 'number' || handler[ONCE_QUAD]) return NEXT
+
+        const nextHandler = Object.create(handler)
+        nextHandler[ONCE_QUAD] = true
+        innet(app * app, nextHandler)
+      }
+    }
+
+    innet([42, 13], createHandler([sum, quad, logPlugin]))
+    innet([42, 13], createHandler([quad, sum, logPlugin]))
+    innet(8, createHandler([quad, sum, logPlugin]))
+    innet(8, createHandler([sum, quad, logPlugin]))
+
+    expect(log[0]).toBe(3025)
+    expect(log[1]).toBe(3025)
+    expect(log[2]).toBe(64)
+    expect(log[3]).toBe(64)
   })
 })

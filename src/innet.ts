@@ -1,34 +1,73 @@
-export const PLUGINS = Symbol('Plugins')
+export const PLUGINS: unique symbol = Symbol('Plugins')
+export const NEXT: unique symbol = Symbol('Next')
 
 export interface Handler {
   // eslint-disable-next-line no-use-before-define
-  [PLUGINS]: PluginHandler[]
+  [PLUGINS]: HandlerPlugin[]
   [key: string]: any
+  [key: symbol]: any
+  [key: number]: any
 }
 
-export type Next = (app?, handler?: Handler, next?: Next) => any
-export type PluginHandler = (app, next: Next, handler: Handler) => any
-export type Plugin = (handler: Handler) => PluginHandler
+export interface HandlerPlugin {
+  (): typeof NEXT | void
+}
+export interface Plugin {
+  (handler: Handler): HandlerPlugin | void
+}
 
-export function createHandler <HI extends Handler, HO extends HI = HI> (plugins: Plugin[], extendHandler: HI = null): HO {
-  const handler = Object.create(extendHandler)
+const appStack: unknown[] = []
+const handlerStack: Handler[] = []
+
+function pushApp (app: unknown, handler: Handler) {
+  appStack.push(app)
+  handlerStack.push(handler)
+}
+
+export default function innet (app: unknown, handler: Handler) {
+  if (appStack.length) {
+    pushApp(app, handler)
+    return
+  }
+
+  pushApp(app, handler)
+
+  while (appStack.length) {
+    runPlugins(appStack.pop(), handlerStack.pop() as Handler)
+  }
+}
+
+let currentHandler: Handler
+let currentApp: unknown
+
+export function useHandler () {
+  return currentHandler
+}
+
+export function useApp () {
+  return currentApp
+}
+
+export function runPlugins (app: unknown, handler: Handler, plugins = handler[PLUGINS]) {
+  currentApp = app
+  currentHandler = handler
+
+  for (let i = 0; i < plugins.length; i++) {
+    if (plugins[i]() !== NEXT) return
+  }
+}
+
+export function createHandler <HI extends Handler, HO extends HI = HI> (plugins: Plugin[], extendHandler?: HI): HO {
+  const handler = Object.create(extendHandler || null)
   const createdPlugins = handler[PLUGINS] = extendHandler ? handler[PLUGINS].slice() : []
 
   for (let i = 0; i < plugins.length; i++) {
-    createdPlugins.push(plugins[i](handler))
+    const plugin = plugins[i](handler)
+
+    if (plugin) {
+      createdPlugins.push(plugin)
+    }
   }
 
   return handler
-}
-
-export function net (app, handler: Handler, id: number, plugins: PluginHandler[]): Next {
-  if (plugins.length > id) {
-    return (a = app, h = handler, next = net(a, h, id + 1, plugins)) => plugins[id](a, next, h)
-  } else {
-    return (a = app) => a
-  }
-}
-
-export default function innet (app, handler: Handler, plugins = handler[PLUGINS]) {
-  return net(app, handler, 0, plugins)()
 }
