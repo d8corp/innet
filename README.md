@@ -80,12 +80,6 @@ yarn
 yarn add innet
 ```
 
-Or you can include the script into the `head`.
-```html
-<!-- Target (innet) -->
-<script defer src="https://unpkg.com/innet/innet.min.js"></script>
-```
-
 ## Usage
 > You can start learning of `innet` from [@innet/dom](https://www.npmjs.com/package/@innet/dom), for the front-end side,
 > or [@innet/server](https://www.npmjs.com/package/@innet/server) for the back-end.
@@ -102,7 +96,7 @@ import handler from './handler' // how to do
 innet(app, handler)
 ```
 
-`app` can be `any` type, but `handler` should be a `Handler` instance.
+`app` can be `any` type, but `handler` should be a `Handler`.
 You can create the handler with `createHandler` function.
 ```typescript
 import { createHandler } from 'innet'
@@ -113,7 +107,9 @@ export default createHandler([])
 By default, the handler does nothing, but you can set any functionality by plugins.
 
 ```typescript
-const sum = () => ([a, b]) => a + b
+const sum = () => ([a, b]) => {
+  console.log(a + b)
+}
 // sum is a plugin
 
 const plugins = [
@@ -123,43 +119,44 @@ const plugins = [
 const handler = createHandler(plugins)
 
 innet([1, 2], handler)
-// returns 3
+// 3
 ```
 
 ### Plugins
-A plugin is a function which runs during a handler creation and returns `PluginHandler`.
+A plugin is a function which runs during a handler creation and returns `HandlerPlugin`.
 
 For example, here is a logger plugin.
-```typescript
-import { PluginHandler } from 'innet'
 
-function logger (): PluginHandler {
+```typescript
+import { HandlerPlugin, NEXT, useApp } from 'innet'
+
+function logger(): HandlerPlugin {
   console.log('logger: initialisation')
-  
-  return (app, next) => {
-    console.log('logger: app', app)
-    
-    return next()
+
+  return () => {
+    console.log('logger: app', useApp())
+
+    return NEXT
   }
 }
 ```
 
-`PluginHandler` is a function with the first argument equals a peace of application,
-the second is a next plugin runner and the last one is a handler.
+`HandlerPlugin` is a function that can use 2 hooks: `useApp` and `useHandler`.
 
 As another example, let's look at the plugin of `async` which allows promises handling.
+
 ```typescript
-import innet, { PluginHandler } from 'innet'
+import innet, { HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
-function async (): PluginHandler {
-  return (app, next, handler) => {
-    if (app instanceof Promise) {
-      // if the application is a promise then we wait for the promise and handle it's result
-      return app.then(data => innet(data, handler))
-    }
+function async(): HandlerPlugin {
+  return () => {
+    const app = useApp()
 
-    // if not then run next plugins
-    return next()
+    if (!(app instanceof Promise)) return NEXT
+
+    const handler = useHandler()
+
+    app.then(data => innet(data, handler))
   }
 }
 ```
@@ -174,10 +171,10 @@ const handler = createHandler([
 ])
 // > 'logger: initialisation'
 
-const result = innet(app, handler)
+innet(app, handler)
 // > 'logger: app', Promise
 
-await result
+await app
 // > 'logger: app', 'test'
 ```
 
@@ -192,10 +189,10 @@ const handler = createHandler([
 ])
 // > 'logger: initialisation'
 
-const result = innet(app, handler)
+innet(app, handler)
 // nothing happens
 
-await result
+await app
 // > 'logger: app', 'test'
 ```
 
