@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var constants = require('./constants.js');
+var constants = require('../constants.js');
 
 var currentHandler;
 var currentApp;

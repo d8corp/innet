@@ -1,5 +1,5 @@
-import { runPlugins } from './plugins'
 import { type Handler } from './types'
+import { runPlugins } from './utils'
 
 const appStack: unknown[] = []
 const handlerStack: Handler[] = []

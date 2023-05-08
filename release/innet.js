@@ -2,7 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var plugins = require('./plugins.js');
+require('./utils/index.js');
+var runPlugins = require('./utils/runPlugins.js');
 
 var appStack = [];
 var handlerStack = [];
@@ -17,7 +18,7 @@ function innet(app, handler) {
     }
     pushApp(app, handler);
     while (appStack.length) {
-        plugins.runPlugins(appStack.pop(), handlerStack.pop());
+        runPlugins.runPlugins(appStack.pop(), handlerStack.pop());
     }
 }
 

@@ -1,4 +1,5 @@
-import { runPlugins } from './plugins.es6.js';
+import './utils/index.es6.js';
+import { runPlugins } from './utils/runPlugins.es6.js';
 
 var appStack = [];
 var handlerStack = [];

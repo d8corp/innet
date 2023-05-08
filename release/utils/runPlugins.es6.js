@@ -1,4 +1,4 @@
-import { PLUGINS, NEXT } from './constants.es6.js';
+import { PLUGINS, NEXT } from '../constants.es6.js';
 
 var currentHandler;
 var currentApp;
