@@ -4,12 +4,12 @@ import { type Handler } from '../types'
 let currentHandler: Handler
 let currentApp: unknown
 
-export function useHandler () {
-  return currentHandler
+export function useHandler<H extends Handler> (): H {
+  return currentHandler as H
 }
 
-export function useApp () {
-  return currentApp
+export function useApp<A> (): A {
+  return currentApp as A
 }
 
 export function runPlugins (app: unknown, handler: Handler, plugins = handler[PLUGINS]) {
