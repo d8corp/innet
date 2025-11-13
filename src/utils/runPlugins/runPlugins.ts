@@ -1,5 +1,5 @@
-import { NEXT, PLUGINS } from '../constants'
-import { type Handler } from '../types'
+import { NEXT, PLUGINS } from '../../constants'
+import { type Handler } from '../../types'
 
 let currentHandler: Handler
 let currentApp: unknown

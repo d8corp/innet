@@ -1,5 +1,5 @@
-import { useHandler } from '../../utils'
+import { extendHandler, useHandler } from '../../utils'
 
 export function useNewHandler () {
-  return Object.create(useHandler())
+  return extendHandler(useHandler())
 }

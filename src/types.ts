@@ -1,7 +1,6 @@
 import { type NEXT, type PLUGINS } from './constants'
 
 export interface Handler {
-  // eslint-disable-next-line no-use-before-define
   [PLUGINS]: HandlerPlugin[]
   [key: string]: any
   [key: symbol]: any
@@ -14,3 +13,5 @@ export interface HandlerPlugin {
 export interface Plugin {
   (handler: Handler): HandlerPlugin | void
 }
+
+export type InnetPriority = 0 | 1 | 2 | 3
