@@ -119,4 +119,116 @@ describe('innet', () => {
     expect(log[2]).toBe(64)
     expect(log[3]).toBe(64)
   })
+  test('priority', () => {
+    const log: any[] = []
+
+    function pushLog (): HandlerPlugin {
+      return () => {
+        log.push(useApp())
+      }
+    }
+
+    const pushLogHandler = createHandler([pushLog])
+
+    function check (): HandlerPlugin {
+      return () => {
+        innet({ app: useApp(), priority: 0, index: 0 }, pushLogHandler, 0)
+        innet({ app: useApp(), priority: 1, index: 1 }, pushLogHandler, 1)
+        innet({ app: useApp(), priority: 2, index: 2 }, pushLogHandler, 2)
+        innet({ app: useApp(), priority: 3, index: 3 }, pushLogHandler, 3)
+        innet({ app: useApp(), priority: 3, index: 4 }, pushLogHandler, 3)
+        innet({ app: useApp(), priority: 2, index: 5 }, pushLogHandler, 2)
+        innet({ app: useApp(), priority: 1, index: 6 }, pushLogHandler, 1)
+        innet({ app: useApp(), priority: 0, index: 7 }, pushLogHandler, 0)
+      }
+    }
+
+    const handler = createHandler([check])
+
+    innet(1, handler)
+    innet(2, handler)
+
+    expect(log).toEqual([
+      {
+        app: 1,
+        index: 7,
+        priority: 0,
+      },
+      {
+        app: 1,
+        index: 0,
+        priority: 0,
+      },
+      {
+        app: 1,
+        index: 1,
+        priority: 1,
+      },
+      {
+        app: 1,
+        index: 6,
+        priority: 1,
+      },
+      {
+        app: 1,
+        index: 5,
+        priority: 2,
+      },
+      {
+        app: 1,
+        index: 2,
+        priority: 2,
+      },
+      {
+        app: 1,
+        index: 3,
+        priority: 3,
+      },
+      {
+        app: 1,
+        index: 4,
+        priority: 3,
+      },
+      {
+        app: 2,
+        index: 7,
+        priority: 0,
+      },
+      {
+        app: 2,
+        index: 0,
+        priority: 0,
+      },
+      {
+        app: 2,
+        index: 1,
+        priority: 1,
+      },
+      {
+        app: 2,
+        index: 6,
+        priority: 1,
+      },
+      {
+        app: 2,
+        index: 5,
+        priority: 2,
+      },
+      {
+        app: 2,
+        index: 2,
+        priority: 2,
+      },
+      {
+        app: 2,
+        index: 3,
+        priority: 3,
+      },
+      {
+        app: 2,
+        index: 4,
+        priority: 3,
+      },
+    ])
+  })
 })

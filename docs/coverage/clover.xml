@@ -1,60 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683471366416" clover="3.2.0">
-  <project timestamp="1683471366416" name="All files">
-    <metrics statements="39" coveredstatements="37" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7" elements="54" coveredelements="50" complexity="0" loc="39" ncloc="39" packages="1" files="5" classes="5"/>
-    <file name="constants.ts" path="/Users/deight/cantinc/innet/src/constants.ts">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <line num="1" count="2" type="stmt"/>
-      <line num="2" count="2" type="stmt"/>
-    </file>
-    <file name="createHandler.ts" path="/Users/deight/cantinc/innet/src/createHandler.ts">
-      <metrics statements="9" coveredstatements="9" conditionals="5" coveredconditionals="4" methods="1" coveredmethods="1"/>
-      <line num="1" count="2" type="stmt"/>
-      <line num="4" count="2" type="stmt"/>
-      <line num="5" count="11" type="cond" truecount="2" falsecount="0"/>
-      <line num="6" count="11" type="cond" truecount="1" falsecount="1"/>
-      <line num="8" count="11" type="stmt"/>
-      <line num="9" count="25" type="stmt"/>
-      <line num="11" count="25" type="cond" truecount="1" falsecount="0"/>
-      <line num="12" count="25" type="stmt"/>
-      <line num="16" count="11" type="stmt"/>
-    </file>
-    <file name="index.ts" path="/Users/deight/cantinc/innet/src/index.ts">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="1" count="22" type="stmt"/>
-      <line num="2" count="2" type="stmt"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="4" count="2" type="stmt"/>
-      <line num="5" count="2" type="stmt"/>
-      <line num="6" count="2" type="stmt"/>
-    </file>
-    <file name="innet.ts" path="/Users/deight/cantinc/innet/src/innet.ts">
-      <metrics statements="12" coveredstatements="10" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <line num="1" count="2" type="stmt"/>
-      <line num="4" count="2" type="stmt"/>
-      <line num="5" count="2" type="stmt"/>
-      <line num="8" count="20" type="stmt"/>
-      <line num="9" count="20" type="stmt"/>
-      <line num="12" count="2" type="stmt"/>
-      <line num="13" count="20" type="cond" truecount="0" falsecount="1"/>
-      <line num="14" count="0" type="stmt"/>
-      <line num="15" count="0" type="stmt"/>
-      <line num="18" count="20" type="stmt"/>
-      <line num="20" count="20" type="stmt"/>
-      <line num="21" count="20" type="stmt"/>
-    </file>
-    <file name="plugins.ts" path="/Users/deight/cantinc/innet/src/plugins.ts">
-      <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-      <line num="1" count="2" type="stmt"/>
-      <line num="7" count="2" type="stmt"/>
-      <line num="8" count="19" type="stmt"/>
-      <line num="11" count="2" type="stmt"/>
-      <line num="12" count="34" type="stmt"/>
-      <line num="15" count="40" type="cond" truecount="1" falsecount="0"/>
-      <line num="16" count="20" type="stmt"/>
-      <line num="17" count="20" type="stmt"/>
-      <line num="19" count="20" type="stmt"/>
-      <line num="20" count="34" type="cond" truecount="1" falsecount="0"/>
-    </file>
+<coverage generated="1763078127217" clover="3.2.0">
+  <project timestamp="1763078127217" name="All files">
+    <metrics statements="75" coveredstatements="74" conditionals="18" coveredconditionals="17" methods="10" coveredmethods="9" elements="103" coveredelements="100" complexity="0" loc="75" ncloc="75" packages="8" files="15" classes="15"/>
+    <package name="src">
+      <metrics statements="37" coveredstatements="37" conditionals="11" coveredconditionals="11" methods="3" coveredmethods="3"/>
+      <file name="constants.ts" path="/Users/deight/cantinc/innet/src/constants.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/index.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="40" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+      </file>
+      <file name="innet.ts" path="/Users/deight/cantinc/innet/src/innet.ts">
+        <metrics statements="29" coveredstatements="29" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="38" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="34" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="30" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="26" type="stmt"/>
+        <line num="19" count="26" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="26" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="38" type="stmt"/>
+        <line num="29" count="38" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="16" type="stmt"/>
+        <line num="32" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="38" type="cond" truecount="1" falsecount="0"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="40" count="38" type="stmt"/>
+        <line num="43" count="16" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.hooks">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/hooks/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.hooks.useNewHandler">
+      <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/hooks/useNewHandler/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="useNewHandler.ts" path="/Users/deight/cantinc/innet/src/hooks/useNewHandler/useNewHandler.ts">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/utils/index.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.activatePlugins">
+      <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="activatePlugins.ts" path="/Users/deight/cantinc/innet/src/utils/activatePlugins/activatePlugins.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="13" type="stmt"/>
+        <line num="5" count="27" type="stmt"/>
+        <line num="7" count="27" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="27" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/utils/activatePlugins/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.createHandler">
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+      <file name="createHandler.ts" path="/Users/deight/cantinc/innet/src/utils/createHandler/createHandler.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="12" count="13" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/utils/createHandler/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.extendHandler">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="extendHandler.ts" path="/Users/deight/cantinc/innet/src/utils/extendHandler/extendHandler.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="13" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/utils/extendHandler/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.runPlugins">
+      <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <file name="index.ts" path="/Users/deight/cantinc/innet/src/utils/runPlugins/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="runPlugins.ts" path="/Users/deight/cantinc/innet/src/utils/runPlugins/runPlugins.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="19" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="66" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="38" type="stmt"/>
+        <line num="17" count="38" type="stmt"/>
+        <line num="19" count="38" type="stmt"/>
+        <line num="20" count="52" type="cond" truecount="1" falsecount="0"/>
+      </file>
+    </package>
   </project>
 </coverage>
