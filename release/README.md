@@ -31,80 +31,94 @@
 </div>
 <br>
 
-## Abstract
-The main mission is simplifying and standardizing application development.
+## Overview
 
-`innet` includes all the best features of famous libraries and frameworks.
-`innet` looks like all you've seen but at the same time it's completely different.
-`innet` is an ecosystem for JavaScript, but the same time it's just a function.
-This is an out-of-the-box solution, at least, going to be.
-`innet` provides you any tools you need to build any JavaScript application:
+`innet` is designed to simplify and standardize application development with a flexible and modern ecosystem.
+
+It combines the best features from popular libraries and frameworks, offering a familiar yet uniquely powerful experience.
+
+`innet` is a JavaScript ecosystem built around a single function-based core, offering an out-of-the-box solution for a variety of application types:
 
 - [x] API Server
-- [x] Web Site
-- [ ] Browser Plugin
-- [ ] Native Application
+- [x] Website
+- [ ] Browser plugin (planned)
+- [x] Native application (in work)
 
 ### JSX Everywhere
-`JSX` provides you the maximum experience of aligning the code.
-`innet` includes `JSX` by default.
-Check [@innet/jsx](https://www.npmjs.com/package/@innet/jsx) to get more.
 
-> **YOU CAN USE `JSX` ON THE SERVER SIDE!**
+`innet` comes with built-in support for JSX, providing a smooth developer experience for writing components.
 
-### Split By Plugins
-Include only code you need, whole functional splits by plugins you can connect (disconnect) separately.
-From `refs`, `portals`, `context`, `life cycle`, `state management` on frontend side
-to `router`, `components`, `proxy`, `async`, `html` on server side and more.
+You can use JSX not only on the client side but also on the server side.
 
-> **YOU CAN USE SAME PLUGINS ON BOTH SIDES!**
+Check out [@innet/jsx](https://www.npmjs.com/package/@innet/jsx) for more details.
 
-### Components
-The component approach is a powerful technology, that `innet` supports.
-You can reuse a piece of an application, and that's awesome.
+> **JSX works seamlessly on both client and server!**
 
-> **YOU CAN USE SAME COMPONENTS ON BOTH SIDES!**
+### Modular Plugin Architecture
 
-There are a lot of features you can see below, welcome!
+`innet`'s functionality is split across modular plugins. Include only what you need:
+
+- Frontend plugins: refs, portals, context, lifecycle, state management
+- Server-side plugins: api, components, proxy, async, endpoints
+- Shared plugins usable on both sides
+
+> **You can use the same plugins on client and server!**
+
+### Component-Based Approach
+
+`innet` fully supports components as a powerful way to build reusable parts of your application.
+
+> **Same components can be used on server and client!**
+
+Explore the many features below to get started!
 
 [![stars](https://img.shields.io/github/stars/d8corp/innet?style=social)](https://github.com/d8corp/innet/stargazers)
 [![watchers](https://img.shields.io/github/watchers/d8corp/innet?style=social)](https://github.com/d8corp/innet/watchers)
 
-## Install
-npm
+## Installation
+
+Using npm:
+
 ```bash
 npm i innet
 ```
-yarn
+
+Using yarn:
 ```bash
 yarn add innet
 ```
 
-## Usage
-> You can start learning of `innet` from [@innet/dom](https://www.npmjs.com/package/@innet/dom), for the front-end side,
-> or [@innet/server](https://www.npmjs.com/package/@innet/server) for the back-end.
+## Getting Started
 
-`innet` is a function which expects 2 required arguments.
-The first one is an application and the second one is a handler of the application.
-Like you can say **what** to do and **how**.
+You can start working with innet using [@innet/dom](https://www.npmjs.com/package/@innet/dom) for frontend apps,
+[@innet/server](https://www.npmjs.com/package/@innet/server) for backend apps,
+or [@innet/native](https://www.npmjs.com/package/@innet/native) for native mobile development.
+
+The main innet function accepts two required parameters and one optional:
+- The first parameter is the application description ("what" to do).
+- The second is a handler defining "how" to execute the application.
+- The third (optional) parameter sets task priority.
+
+Example usage:
+
 ```typescript
 import innet from 'innet'
 
 import app from './app' // what to do
-import handler from './handler' // how to do
+import handler from './handler' // how to do it
 
 innet(app, handler)
 ```
 
-`app` can be `any` type, but `handler` should be a `Handler`.
-You can create the handler with `createHandler` function.
+The `app` can be any type, while the `handler` must be a `Handler` object. Create a `handler` using the `createHandler` function:
+
 ```typescript
 import { createHandler } from 'innet'
 
 export default createHandler([])
 ```
 
-By default, the handler does nothing, but you can set any functionality by plugins.
+By default, the handler does nothing until you add plugins to define functionality.
 
 ```typescript
 const sum = () => ([a, b]) => {
@@ -118,20 +132,19 @@ const plugins = [
 
 const handler = createHandler(plugins)
 
-innet([1, 2], handler)
-// 3
+innet([1, 2], handler) // Outputs: 3
 ```
 
 ### Plugins
-A plugin is a function which runs during a handler creation and returns `HandlerPlugin`.
 
-For example, here is a logger plugin.
+Plugins are functions that run during handler creation and return a `HandlerPlugin`.
 
+Example: a logger plugin
 ```typescript
 import { HandlerPlugin, NEXT, useApp } from 'innet'
 
 function logger(): HandlerPlugin {
-  console.log('logger: initialisation')
+  console.log('logger: initialization')
 
   return () => {
     console.log('logger: app', useApp())
@@ -141,10 +154,9 @@ function logger(): HandlerPlugin {
 }
 ```
 
-`HandlerPlugin` is a function that can use 2 hooks: `useApp` and `useHandler`.
+`HandlerPlugin` functions have access to two hooks: `useApp` and `useHandler`.
 
-As another example, let's look at the plugin of `async` which allows promises handling.
-
+Example of an async plugin to handle promises:
 ```typescript
 import innet, { HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
@@ -161,7 +173,7 @@ function async(): HandlerPlugin {
 }
 ```
 
-Let's try those plugins
+Try using both plugins together:
 ```typescript
 const app = new Promise(resolve => resolve('test'))
 
@@ -178,8 +190,7 @@ await app
 // > 'logger: app', 'test'
 ```
 
-The order of the plugins is important.
-
+Plugin order matters:
 ```typescript
 const app = new Promise(resolve => resolve('test'))
 
@@ -196,9 +207,9 @@ await app
 // > 'logger: app', 'test'
 ```
 
-### Extend a handler
-You can extend a handler with `createHandler`,
-just provide the previous handler to the second argument.
+### Extending a Handler
+
+You can extend handlers using `createHandler` by passing plugins and an existing handler to build on:
 
 ```typescript
 const handler1 = createHandler([
@@ -211,10 +222,73 @@ const handler2 = createHandler([
 ], handler1)
 ```
 
-Check out [@innet/utils](https://www.npmjs.com/package/@innet/utils),
-there you can find the most general plugins and utils.
+### Task Priority
 
-## Issues
-If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet/issues).
+Control the execution priority of innet tasks with the optional third argument. Possible values:
+- 0 - add to the start of high priority queue
+- 1 - default, add to the end of high priority queue
+- 2 - add to the start of low priority queue
+- 3 - add to the end of low priority queue
+
+> Runs from the left to the right <br/>
+> `[0, ...,  1] > [2, ..., 3]` <br/>
+> `^   high   ^   ^   low   ^`
+
+```ts
+const log: any[] = []
+
+function pushLog (): HandlerPlugin {
+  return () => {
+    log.push(useApp())
+  }
+}
+
+const pushLogHandler = createHandler([pushLog])
+
+function check (): HandlerPlugin {
+  return () => {
+    innet({ app: useApp(), priority: 0, index: 0 }, pushLogHandler, 0)
+    innet({ app: useApp(), priority: 1, index: 1 }, pushLogHandler, 1)
+    innet({ app: useApp(), priority: 2, index: 2 }, pushLogHandler, 2)
+    innet({ app: useApp(), priority: 3, index: 3 }, pushLogHandler, 3)
+    innet({ app: useApp(), priority: 3, index: 4 }, pushLogHandler, 3)
+    innet({ app: useApp(), priority: 2, index: 5 }, pushLogHandler, 2)
+    innet({ app: useApp(), priority: 1, index: 6 }, pushLogHandler, 1)
+    innet({ app: useApp(), priority: 0, index: 7 }, pushLogHandler, 0)
+  }
+}
+
+const handler = createHandler([check])
+
+innet(1, handler)
+innet(2, handler)
+```
+The `log` items:
+
+```
+{ app: 1, index: 7, priority: 0 }
+{ app: 1, index: 0, priority: 0 }
+{ app: 1, index: 1, priority: 1 }
+{ app: 1, index: 6, priority: 1 }
+{ app: 1, index: 5, priority: 2 }
+{ app: 1, index: 2, priority: 2 }
+{ app: 1, index: 3, priority: 3 }
+{ app: 1, index: 4, priority: 3 }
+{ app: 2, index: 7, priority: 0 }
+{ app: 2, index: 0, priority: 0 }
+{ app: 2, index: 1, priority: 1 }
+{ app: 2, index: 6, priority: 1 }
+{ app: 2, index: 5, priority: 2 }
+{ app: 2, index: 2, priority: 2 }
+{ app: 2, index: 3, priority: 3 }
+{ app: 2, index: 4, priority: 3 }
+```
+
+
+Explore more general plugins and utilities in [@innet/utils](https://www.npmjs.com/package/@innet/utils)
+
+## Issues & Contributions
+
+If you find bugs or want to suggest features, please open an issue on [GitHub](https://github.com/d8corp/innet/issues).
 
 [![issues](https://img.shields.io/github/issues-raw/d8corp/innet)](https://github.com/d8corp/innet/issues)

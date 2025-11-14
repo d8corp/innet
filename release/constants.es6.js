@@ -1,4 +1,4 @@
-var NEXT = Symbol('Next');
-var PLUGINS = Symbol('Plugins');
+const NEXT = Symbol('Next');
+const PLUGINS = Symbol('Plugins');
 
 export { NEXT, PLUGINS };

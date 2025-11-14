@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var NEXT = Symbol('Next');
-var PLUGINS = Symbol('Plugins');
+const NEXT = Symbol('Next');
+const PLUGINS = Symbol('Plugins');
 
 exports.NEXT = NEXT;
 exports.PLUGINS = PLUGINS;

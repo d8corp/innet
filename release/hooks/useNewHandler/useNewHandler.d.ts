@@ -1,1 +1,1 @@
-export declare function useNewHandler(): any;
+export declare function useNewHandler(): import("../..").Handler;

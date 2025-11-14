@@ -11,3 +11,4 @@ export interface HandlerPlugin {
 export interface Plugin {
     (handler: Handler): HandlerPlugin | void;
 }
+export type InnetPriority = 0 | 1 | 2 | 3;

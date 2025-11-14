@@ -1,18 +1,17 @@
-import { PLUGINS, NEXT } from '../constants.es6.js';
+import { NEXT, PLUGINS } from '../../constants.es6.js';
 
-var currentHandler;
-var currentApp;
+let currentHandler;
+let currentApp;
 function useHandler() {
     return currentHandler;
 }
 function useApp() {
     return currentApp;
 }
-function runPlugins(app, handler, plugins) {
-    if (plugins === void 0) { plugins = handler[PLUGINS]; }
+function runPlugins(app, handler, plugins = handler[PLUGINS]) {
     currentApp = app;
     currentHandler = handler;
-    for (var i = 0; i < plugins.length; i++) {
+    for (let i = 0; i < plugins.length; i++) {
         if (plugins[i]() !== NEXT)
             return;
     }

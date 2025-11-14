@@ -2,21 +2,20 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var constants = require('../constants.js');
+var constants = require('../../constants.js');
 
-var currentHandler;
-var currentApp;
+let currentHandler;
+let currentApp;
 function useHandler() {
     return currentHandler;
 }
 function useApp() {
     return currentApp;
 }
-function runPlugins(app, handler, plugins) {
-    if (plugins === void 0) { plugins = handler[constants.PLUGINS]; }
+function runPlugins(app, handler, plugins = handler[constants.PLUGINS]) {
     currentApp = app;
     currentHandler = handler;
-    for (var i = 0; i < plugins.length; i++) {
+    for (let i = 0; i < plugins.length; i++) {
         if (plugins[i]() !== constants.NEXT)
             return;
     }

@@ -1,6 +1,6 @@
 {
   "name": "innet",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-beta.1",
   "description": "CANT inc. application build ecosystem.",
   "main": "index.js",
   "module": "index.es6.js",
@@ -24,7 +24,16 @@
   "keywords": [
     "CANTinc.",
     "ecosystem",
-    "front-end"
+    "JavaScript",
+    "Typescript",
+    "front-end",
+    "back-end",
+    "JS",
+    "TS",
+    "native",
+    "mobile",
+    "ios",
+    "android"
   ],
   "author": "Mikhail Lysikov <d8corp@mail.ru>",
   "license": "MIT",
