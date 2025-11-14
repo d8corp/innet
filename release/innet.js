@@ -10,26 +10,26 @@ let handlerStack = [];
 let appStackNext = [];
 let handlerStackNext = [];
 let running = false;
-function pushApp(app, handler, priority) {
-    if (priority === 3) {
-        appStackNext.push(app);
-        handlerStackNext.push(handler);
-    }
-    else if (priority === 2) {
-        appStackNext.unshift(app);
-        handlerStackNext.unshift(handler);
-    }
-    else if (priority === 1) {
+const priorityMap = [
+    (app, handler) => {
         appStack.push(app);
         handlerStack.push(handler);
-    }
-    else {
+    },
+    (app, handler) => {
         appStack.unshift(app);
         handlerStack.unshift(handler);
-    }
-}
-function innet(app, handler, priority = 1) {
-    pushApp(app, handler, priority);
+    },
+    (app, handler) => {
+        appStackNext.push(app);
+        handlerStackNext.push(handler);
+    },
+    (app, handler) => {
+        appStackNext.unshift(app);
+        handlerStackNext.unshift(handler);
+    },
+];
+function innet(app, handler, priority = 0) {
+    priorityMap[priority](app, handler);
     if (running)
         return;
     running = true;
@@ -40,7 +40,7 @@ function innet(app, handler, priority = 1) {
             appStackNext = [];
             handlerStackNext = [];
         }
-        runPlugins.runPlugins(appStack.shift(), handlerStack.shift());
+        runPlugins.runPlugins(appStack.pop(), handlerStack.pop());
     }
     running = false;
 }
