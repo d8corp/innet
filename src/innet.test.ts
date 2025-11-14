@@ -149,86 +149,22 @@ describe('innet', () => {
     innet(2, handler)
 
     expect(log).toEqual([
-      {
-        app: 1,
-        index: 7,
-        priority: 0,
-      },
-      {
-        app: 1,
-        index: 0,
-        priority: 0,
-      },
-      {
-        app: 1,
-        index: 1,
-        priority: 1,
-      },
-      {
-        app: 1,
-        index: 6,
-        priority: 1,
-      },
-      {
-        app: 1,
-        index: 5,
-        priority: 2,
-      },
-      {
-        app: 1,
-        index: 2,
-        priority: 2,
-      },
-      {
-        app: 1,
-        index: 3,
-        priority: 3,
-      },
-      {
-        app: 1,
-        index: 4,
-        priority: 3,
-      },
-      {
-        app: 2,
-        index: 7,
-        priority: 0,
-      },
-      {
-        app: 2,
-        index: 0,
-        priority: 0,
-      },
-      {
-        app: 2,
-        index: 1,
-        priority: 1,
-      },
-      {
-        app: 2,
-        index: 6,
-        priority: 1,
-      },
-      {
-        app: 2,
-        index: 5,
-        priority: 2,
-      },
-      {
-        app: 2,
-        index: 2,
-        priority: 2,
-      },
-      {
-        app: 2,
-        index: 3,
-        priority: 3,
-      },
-      {
-        app: 2,
-        index: 4,
-        priority: 3,
-      },
+      { app: 1, index: 7, priority: 0 },
+      { app: 1, index: 0, priority: 0 },
+      { app: 1, index: 1, priority: 1 },
+      { app: 1, index: 6, priority: 1 },
+      { app: 1, index: 5, priority: 2 },
+      { app: 1, index: 2, priority: 2 },
+      { app: 1, index: 3, priority: 3 },
+      { app: 1, index: 4, priority: 3 },
+      { app: 2, index: 7, priority: 0 },
+      { app: 2, index: 0, priority: 0 },
+      { app: 2, index: 1, priority: 1 },
+      { app: 2, index: 6, priority: 1 },
+      { app: 2, index: 5, priority: 2 },
+      { app: 2, index: 2, priority: 2 },
+      { app: 2, index: 3, priority: 3 },
+      { app: 2, index: 4, priority: 3 },
     ])
   })
 })

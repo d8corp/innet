@@ -135,18 +135,6 @@ const handler = createHandler(plugins)
 innet([1, 2], handler) // Outputs: 3
 ```
 
-### Task Priority
-
-Control the execution priority of innet tasks with the optional third argument. Possible values:
-- 0 - add to the start of high priority queue
-- 1 - default, add to the end of high priority queue
-- 2 - add to the start of low priority queue
-- 3 - add to the end of low priority queue
-
-> Runs from the left to the right <br/>
-> `[0, ...,  1] > [2, ..., 3]` <br/>
-> `^   high   ^   ^   low   ^`
-
 ### Plugins
 
 Plugins are functions that run during handler creation and return a `HandlerPlugin`.
@@ -232,6 +220,68 @@ const handler1 = createHandler([
 const handler2 = createHandler([
   logger,
 ], handler1)
+```
+
+### Task Priority
+
+Control the execution priority of innet tasks with the optional third argument. Possible values:
+- 0 - add to the start of high priority queue
+- 1 - default, add to the end of high priority queue
+- 2 - add to the start of low priority queue
+- 3 - add to the end of low priority queue
+
+> Runs from the left to the right <br/>
+> `[0, ...,  1] > [2, ..., 3]` <br/>
+> `^   high   ^   ^   low   ^`
+
+```ts
+const log: any[] = []
+
+function pushLog (): HandlerPlugin {
+  return () => {
+    log.push(useApp())
+  }
+}
+
+const pushLogHandler = createHandler([pushLog])
+
+function check (): HandlerPlugin {
+  return () => {
+    innet({ app: useApp(), priority: 0, index: 0 }, pushLogHandler, 0)
+    innet({ app: useApp(), priority: 1, index: 1 }, pushLogHandler, 1)
+    innet({ app: useApp(), priority: 2, index: 2 }, pushLogHandler, 2)
+    innet({ app: useApp(), priority: 3, index: 3 }, pushLogHandler, 3)
+    innet({ app: useApp(), priority: 3, index: 4 }, pushLogHandler, 3)
+    innet({ app: useApp(), priority: 2, index: 5 }, pushLogHandler, 2)
+    innet({ app: useApp(), priority: 1, index: 6 }, pushLogHandler, 1)
+    innet({ app: useApp(), priority: 0, index: 7 }, pushLogHandler, 0)
+  }
+}
+
+const handler = createHandler([check])
+
+innet(1, handler)
+innet(2, handler)
+```
+The `log` items:
+
+```
+{ app: 1, index: 7, priority: 0 }
+{ app: 1, index: 0, priority: 0 }
+{ app: 1, index: 1, priority: 1 }
+{ app: 1, index: 6, priority: 1 }
+{ app: 1, index: 5, priority: 2 }
+{ app: 1, index: 2, priority: 2 }
+{ app: 1, index: 3, priority: 3 }
+{ app: 1, index: 4, priority: 3 }
+{ app: 2, index: 7, priority: 0 }
+{ app: 2, index: 0, priority: 0 }
+{ app: 2, index: 1, priority: 1 }
+{ app: 2, index: 6, priority: 1 }
+{ app: 2, index: 5, priority: 2 }
+{ app: 2, index: 2, priority: 2 }
+{ app: 2, index: 3, priority: 3 }
+{ app: 2, index: 4, priority: 3 }
 ```
 
 
