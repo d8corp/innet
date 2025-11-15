@@ -1,20 +1,18 @@
 import { NEXT, PLUGINS } from '../../constants'
-import { type Handler } from '../../types'
+import { type Action, type Handler } from '../../types'
 
-let currentHandler: Handler
-let currentApp: unknown
+let currentAction: Action
 
 export function useHandler<H extends Handler> (): H {
-  return currentHandler as H
+  return currentAction[1] as H
 }
 
 export function useApp<A> (): A {
-  return currentApp as A
+  return currentAction[0] as A
 }
 
-export function runPlugins (app: unknown, handler: Handler, plugins = handler[PLUGINS]) {
-  currentApp = app
-  currentHandler = handler
+export function runPlugins (action: Action, plugins = action[1][PLUGINS]) {
+  currentAction = action
 
   for (let i = 0; i < plugins.length; i++) {
     if (plugins[i]() !== NEXT) return

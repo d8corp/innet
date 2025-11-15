@@ -14,4 +14,5 @@ export interface Plugin {
   (handler: Handler): HandlerPlugin | void
 }
 
-export type InnetPriority = 0 | 1 | 2 | 3
+export type Action = [unknown, Handler]
+export type Stack = Action[]
