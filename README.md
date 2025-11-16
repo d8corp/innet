@@ -123,22 +123,15 @@ import innet from 'innet'
 
 const log: any[] = []
 
+const logger = (value: any) => () => {
+  log.push(value)
+}
+
 innet(() => {
-  innet(() => {
-    log.push('Mounted')
-  }, 2)
-
-  innet(() => {
-    log.push('Mounting')
-  }, 1)
-
-  innet(() => {
-    log.push('Rendering')
-  }, 0)
-
-  innet(() => {
-    log.push('WillMount')
-  }, 1, true)
+  innet(logger('Mounted'), 2)
+  innet(logger('Mounting'), 1)
+  innet(logger('Rendering'), 0)
+  innet(logger('WillMount'), 1, true)
 })
 // log: ['Rendering', 'WillMount', 'Mounting', 'Mounted']
 ```

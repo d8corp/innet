@@ -1,31 +1,24 @@
-import innet from '.'
+import innet, { type Task } from '.'
 
 describe('innet', () => {
   test('simple running', () => {
     const log: any[] = []
-    innet(() => log.push(55))
+    innet(() => log.push(42))
     expect(log.length).toBe(1)
-    expect(log[0]).toBe(55)
+    expect(log[0]).toBe(42)
   })
   test('order', () => {
     const log: any[] = []
 
+    const logger = (value: any) => () => {
+      log.push(value)
+    }
+
     innet(() => {
-      innet(() => {
-        log.push('Mounted')
-      }, 2)
-
-      innet(() => {
-        log.push('Mounting')
-      }, 1)
-
-      innet(() => {
-        log.push('Rendering')
-      }, 0)
-
-      innet(() => {
-        log.push('WillMount')
-      }, 1, true)
+      innet(logger('Mounted'), 2)
+      innet(logger('Mounting'), 1)
+      innet(logger('Rendering'), 0)
+      innet(logger('WillMount'), 1, true)
     })
 
     expect(log).toEqual(['Rendering', 'WillMount', 'Mounting', 'Mounted'])
@@ -72,24 +65,22 @@ describe('innet', () => {
   })
   test('hooks', () => {
     const log: any[] = []
-    let app: any
+    let currentApp: any
 
-    const useApp = () => app
+    const useApp = () => currentApp
 
     const logApp = () => {
       log.push(useApp())
     }
 
-    innet(() => {
-      innet(() => {
-        app = 1
-        logApp()
-      }, 1)
+    const withApp = (app: any, handler: Task) => () => {
+      currentApp = app
+      handler()
+    }
 
-      innet(() => {
-        app = 2
-        logApp()
-      })
+    innet(() => {
+      innet(withApp(1, logApp), 1)
+      innet(withApp(2, logApp))
     })
 
     expect(log).toEqual([2, 1])
