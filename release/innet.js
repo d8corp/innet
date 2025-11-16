@@ -2,45 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var constants = require('./constants.js');
 require('./utils/index.js');
-var runPlugins = require('./utils/runPlugins/runPlugins.js');
+var addTask = require('./utils/addTask/addTask.js');
 
-let appStack = [];
-let handlerStack = [];
-let appStackNext = [];
-let handlerStackNext = [];
 let running = false;
-const priorityMap = [
-    (app, handler) => {
-        appStack.push(app);
-        handlerStack.push(handler);
-    },
-    (app, handler) => {
-        appStack.unshift(app);
-        handlerStack.unshift(handler);
-    },
-    (app, handler) => {
-        appStackNext.push(app);
-        handlerStackNext.push(handler);
-    },
-    (app, handler) => {
-        appStackNext.unshift(app);
-        handlerStackNext.unshift(handler);
-    },
-];
-function innet(app, handler, priority = 0) {
-    priorityMap[priority](app, handler);
+function innet(task, priority = 0, force) {
+    addTask.addTask(task, priority, force);
     if (running)
         return;
     running = true;
-    while (appStack.length || appStackNext.length) {
-        if (!appStack.length) {
-            appStack = appStackNext;
-            handlerStack = handlerStackNext;
-            appStackNext = [];
-            handlerStackNext = [];
+    while (constants.dequeList.length) {
+        while (constants.dequeList[0] && !constants.dequeList[0].isEmpty) {
+            constants.dequeList[0].pop()();
         }
-        runPlugins.runPlugins(appStack.pop(), handlerStack.pop());
+        constants.dequeList.shift();
     }
     running = false;
 }

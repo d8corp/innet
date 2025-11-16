@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const dequeList = [];
+var Deque = require('./Deque.js');
 
-exports.dequeList = dequeList;
+
+
+exports.Deque = Deque.Deque;

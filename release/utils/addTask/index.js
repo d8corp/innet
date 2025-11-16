@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const dequeList = [];
+var addTask = require('./addTask.js');
 
-exports.dequeList = dequeList;
+
+
+exports.addTask = addTask.addTask;
