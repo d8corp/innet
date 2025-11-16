@@ -1,4 +1,2 @@
-import { type Task } from './types'
-import type { Deque } from './utils/Deque'
-
-export const dequeList: Deque<Task>[] = []
+export const NEXT: unique symbol = Symbol('Next')
+export const PLUGINS: unique symbol = Symbol('Plugins')
