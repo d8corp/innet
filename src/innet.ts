@@ -1,22 +1,22 @@
-import { stacks } from './constants'
-import type { Action, Handler } from './types'
-import { addStack, runPlugins } from './utils'
+import { dequeList } from './constants'
+import type { Task } from './types'
+import { addTask } from './utils'
 
 let running = false
 
-export default function innet (app: unknown, handler: Handler, priority = 0, force?: boolean) {
-  addStack([app, handler], priority, force)
+export default function innet (task: Task, priority = 0, force?: boolean) {
+  addTask(task, priority, force)
 
   if (running) return
 
   running = true
 
-  while (stacks.length) {
-    while (stacks[0]?.length) {
-      runPlugins(stacks[0].pop() as Action)
+  while (dequeList.length) {
+    while (dequeList[0] && !dequeList[0].isEmpty) {
+      (dequeList[0].pop() as Task)()
     }
 
-    stacks.shift()
+    dequeList.shift()
   }
 
   running = false

@@ -1,6 +1,4 @@
-import type { Stack } from './types'
+import { type Task } from './types'
+import type { Deque } from './utils/Deque'
 
-export const NEXT: unique symbol = Symbol('Next')
-export const PLUGINS: unique symbol = Symbol('Plugins')
-
-export const stacks: Stack[] = []
+export const dequeList: Deque<Task>[] = []

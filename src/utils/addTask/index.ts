@@ -1,2 +1,1 @@
 export * from './addTask'
-export * from './Deque'

@@ -94,196 +94,60 @@ You can start working with innet using [@innet/dom](https://www.npmjs.com/packag
 [@innet/server](https://www.npmjs.com/package/@innet/server) for backend apps,
 or [@innet/native](https://www.npmjs.com/package/@innet/native) for native mobile development.
 
-The main innet function accepts two required parameters and one optional:
-- The first parameter is the application description ("what" to do).
-- The second is a handler defining "how" to execute the application.
-- The third (optional) parameter sets task priority.
+The main `innet` function accepts one required parameter and two optional:
+- The first parameter is a task represented by a function that will be executed within the task queue.
+- The second (optional) parameter sets the task priority, with a default value of 0.
+- The third (optional) parameter determines the queue order, where LIFO is used if true; otherwise, FIFO by default.
 
-Example usage:
+If innet is executed outside the context of another innet call, the code is executed immediately during the call.
 
 ```typescript
 import innet from 'innet'
 
-import app from './app' // what to do
-import handler from './handler' // how to do it
+const log: any[] = []
 
-innet(app, handler)
-```
-
-The `app` can be any type, while the `handler` must be a `Handler` object. Create a `handler` using the `createHandler` function:
-
-```typescript
-import { createHandler } from 'innet'
-
-export default createHandler([])
-```
-
-By default, the handler does nothing until you add plugins to define functionality.
-
-```typescript
-const sum = () => ([a, b]) => {
-  console.log(a + b)
-}
-// sum is a plugin
-
-const plugins = [
-  sum,
-]
-
-const handler = createHandler(plugins)
-
-innet([1, 2], handler) // Outputs: 3
-```
-
-### Plugins
-
-Plugins are functions that run during handler creation and return a `HandlerPlugin`.
-
-Example: a logger plugin
-```typescript
-import { HandlerPlugin, NEXT, useApp } from 'innet'
-
-function logger(): HandlerPlugin {
-  console.log('logger: initialization')
-
-  return () => {
-    console.log('logger: app', useApp())
-
-    return NEXT
-  }
-}
-```
-
-`HandlerPlugin` functions have access to two hooks: `useApp` and `useHandler`.
-
-Example of an async plugin to handle promises:
-```typescript
-import innet, { HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
-
-function async(): HandlerPlugin {
-  return () => {
-    const app = useApp()
-
-    if (!(app instanceof Promise)) return NEXT
-
-    const handler = useHandler()
-
-    app.then(data => innet(data, handler))
-  }
-}
-```
-
-Try using both plugins together:
-```typescript
-const app = new Promise(resolve => resolve('test'))
-
-const handler = createHandler([
-  logger,
-  async,
-])
-// > 'logger: initialisation'
-
-innet(app, handler)
-// > 'logger: app', Promise
-
-await app
-// > 'logger: app', 'test'
-```
-
-Plugin order matters:
-```typescript
-const app = new Promise(resolve => resolve('test'))
-
-const handler = createHandler([
-  async, // change order
-  logger,
-])
-// > 'logger: initialisation'
-
-innet(app, handler)
-// nothing happens
-
-await app
-// > 'logger: app', 'test'
-```
-
-### Extending a Handler
-
-You can extend handlers using `createHandler` by passing plugins and an existing handler to build on:
-
-```typescript
-const handler1 = createHandler([
-  async,
-  sum,
-])
-
-const handler2 = createHandler([
-  logger,
-], handler1)
+innet(() => log.push(42))
+// log: [42]
 ```
 
 ### Task Priority
 
-Control the execution priority of innet tasks with the optional third argument. Possible values:
-- 0 - add to the start of high priority queue
-- 1 - default, add to the end of high priority queue
-- 2 - add to the start of low priority queue
-- 3 - add to the end of low priority queue
+Control the execution priority of innet tasks with the second and the third optional argument.
 
-> Runs from the left to the right <br/>
-> `[0, ...,  1] > [2, ..., 3]` <br/>
-> `^   high   ^   ^   low   ^`
+- The third argument, when true, switches the order of the queue from the default FIFO to LIFO.
+- Lower priority values are executed before higher priority values.
+- Tasks with the same priority are ordered based on FIFO or LIFO, depending on the third parameter.
 
-```ts
+```typescript
+import innet from 'innet'
+
 const log: any[] = []
 
-function pushLog (): HandlerPlugin {
-  return () => {
-    log.push(useApp())
-  }
-}
+innet(() => {
+  innet(() => {
+    log.push('Mounted')
+  }, 2)
 
-const pushLogHandler = createHandler([pushLog])
+  innet(() => {
+    log.push('Mounting')
+  }, 1)
 
-function check (): HandlerPlugin {
-  return () => {
-    innet({ app: useApp(), priority: 0, index: 0 }, pushLogHandler, 0)
-    innet({ app: useApp(), priority: 1, index: 1 }, pushLogHandler, 1)
-    innet({ app: useApp(), priority: 2, index: 2 }, pushLogHandler, 2)
-    innet({ app: useApp(), priority: 3, index: 3 }, pushLogHandler, 3)
-    innet({ app: useApp(), priority: 3, index: 4 }, pushLogHandler, 3)
-    innet({ app: useApp(), priority: 2, index: 5 }, pushLogHandler, 2)
-    innet({ app: useApp(), priority: 1, index: 6 }, pushLogHandler, 1)
-    innet({ app: useApp(), priority: 0, index: 7 }, pushLogHandler, 0)
-  }
-}
+  innet(() => {
+    log.push('Rendering')
+  }, 0)
 
-const handler = createHandler([check])
-
-innet(1, handler)
-innet(2, handler)
-```
-The `log` items:
-
-```
-{ app: 1, index: 7, priority: 0 }
-{ app: 1, index: 0, priority: 0 }
-{ app: 1, index: 1, priority: 1 }
-{ app: 1, index: 6, priority: 1 }
-{ app: 1, index: 5, priority: 2 }
-{ app: 1, index: 2, priority: 2 }
-{ app: 1, index: 3, priority: 3 }
-{ app: 1, index: 4, priority: 3 }
-{ app: 2, index: 7, priority: 0 }
-{ app: 2, index: 0, priority: 0 }
-{ app: 2, index: 1, priority: 1 }
-{ app: 2, index: 6, priority: 1 }
-{ app: 2, index: 5, priority: 2 }
-{ app: 2, index: 2, priority: 2 }
-{ app: 2, index: 3, priority: 3 }
-{ app: 2, index: 4, priority: 3 }
+  innet(() => {
+    log.push('WillMount')
+  }, 1, true)
+})
+// log: ['Rendering', 'WillMount', 'Mounting', 'Mounted']
 ```
 
+In the example, 'Rendering' (priority 0) executes first, followed by 'WillMount' (priority 1, LIFO), then 'Mounting' (priority 1, FIFO), and finally 'Mounted' (priority 2).
+
+> Runs from the left to the right <br/>
+> `[true, ...,  false] > [true, ..., false] > ...` <br/>
+> `^        0        ^   ^       1        ^`
 
 Explore more general plugins and utilities in [@innet/utils](https://www.npmjs.com/package/@innet/utils)
 
