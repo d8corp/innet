@@ -1,6 +1,6 @@
 {
   "name": "innet",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.3",
   "description": "CANT inc. application build ecosystem.",
   "main": "index.js",
   "module": "index.es6.js",
@@ -40,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/d8corp/innet/issues"
   },
-  "homepage": "https://github.com/d8corp/innet"
+  "homepage": "https://github.com/d8corp/innet",
+  "dependencies": {
+    "queue-nano-task": "^1.0.0"
+  }
 }

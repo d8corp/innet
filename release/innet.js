@@ -2,23 +2,14 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var constants = require('./constants.js');
+var queueNanoTask = require('queue-nano-task');
 require('./utils/index.js');
-var addTask = require('./utils/addTask/addTask.js');
+var runPlugins = require('./utils/runPlugins/runPlugins.js');
 
-let running = false;
-function innet(task, priority = 0, force) {
-    addTask.addTask(task, priority, force);
-    if (running)
-        return;
-    running = true;
-    while (constants.dequeList.length) {
-        while (constants.dequeList[0] && !constants.dequeList[0].isEmpty) {
-            constants.dequeList[0].pop()();
-        }
-        constants.dequeList.shift();
-    }
-    running = false;
+function innet(app, handler = runPlugins.useHandler(), priority = 0, force) {
+    queueNanoTask.queueNanotask(() => {
+        runPlugins.runPlugins(app, handler);
+    }, priority, force);
 }
 
 exports["default"] = innet;

@@ -167,4 +167,28 @@ describe('innet', () => {
       { app: 2, force: false, index: 5, priority: 1 },
     ])
   })
+  test('extend handler', () => {
+    const log: any[] = []
+
+    function pluginA (): HandlerPlugin {
+      return () => {
+        log.push('A')
+        return NEXT
+      }
+    }
+
+    function pluginB (): HandlerPlugin {
+      return () => {
+        log.push('B')
+        return NEXT
+      }
+    }
+
+    const handleA = createHandler([pluginA])
+    const handleAB = createHandler([pluginB], handleA)
+
+    innet(1, handleAB)
+
+    expect(log).toEqual(['B', 'A'])
+  })
 })

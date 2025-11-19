@@ -1,6 +1,10 @@
 export { default } from './innet.es6.js';
 import './types.es6.js';
-export { dequeList } from './constants.es6.js';
+export { NEXT, PLUGINS } from './constants.es6.js';
 import './utils/index.es6.js';
-export { addTask } from './utils/addTask/addTask.es6.js';
-export { Deque } from './utils/Deque/Deque.es6.js';
+import './hooks/index.es6.js';
+export { activatePlugins } from './utils/activatePlugins/activatePlugins.es6.js';
+export { createHandler } from './utils/createHandler/createHandler.es6.js';
+export { extendHandler } from './utils/extendHandler/extendHandler.es6.js';
+export { runPlugins, useApp, useHandler } from './utils/runPlugins/runPlugins.es6.js';
+export { useNewHandler } from './hooks/useNewHandler/useNewHandler.es6.js';

@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const dequeList = [];
+const NEXT = Symbol('Next');
+const PLUGINS = Symbol('Plugins');
 
-exports.dequeList = dequeList;
+exports.NEXT = NEXT;
+exports.PLUGINS = PLUGINS;

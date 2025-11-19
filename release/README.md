@@ -94,53 +94,156 @@ You can start working with innet using [@innet/dom](https://www.npmjs.com/packag
 [@innet/server](https://www.npmjs.com/package/@innet/server) for backend apps,
 or [@innet/native](https://www.npmjs.com/package/@innet/native) for native mobile development.
 
-The main `innet` function accepts one required parameter and two optional:
-- The first parameter is a task represented by a function that will be executed within the task queue.
-- The second (optional) parameter sets the task priority, with a default value of 0.
-- The third (optional) parameter determines the queue order, where LIFO is used if true; otherwise, FIFO by default.
+The main innet function accepts two required parameters and two optional:
+- The first parameter is the application description ("what" to do).
+- The second is a handler defining "how" to execute the application.
+- The third (optional) parameter sets the task priority, with a default value of 0.
+- The fourth (optional) parameter determines the queue order, where LIFO is used if true; otherwise, FIFO by default.
 
-If innet is executed outside the context of another innet call, the code is executed immediately during the call.
+Example usage:
 
 ```typescript
 import innet from 'innet'
 
-const log: any[] = []
+import app from './app' // what to do
+import handler from './handler' // how to do it
 
-innet(() => log.push(42))
-// log: [42]
+innet(app, handler)
+```
+
+The `app` can be any type, while the `handler` must be a `Handler` object. Create a `handler` using the `createHandler` function:
+
+```typescript
+import { createHandler } from 'innet'
+
+export default createHandler([])
+```
+
+By default, the handler does nothing until you add plugins to define functionality.
+
+```typescript
+const sum = () => ([a, b]) => {
+  console.log(a + b)
+}
+// sum is a plugin
+
+const plugins = [
+  sum,
+]
+
+const handler = createHandler(plugins)
+
+innet([1, 2], handler) // Outputs: 3
+```
+
+### Plugins
+
+Plugins are functions that run during handler creation and return a `HandlerPlugin`.
+
+Example: a logger plugin
+```typescript
+import { HandlerPlugin, NEXT, useApp } from 'innet'
+
+function logger(): HandlerPlugin {
+  console.log('logger: initialization')
+
+  return () => {
+    console.log('logger: app', useApp())
+
+    return NEXT
+  }
+}
+```
+
+`HandlerPlugin` functions have access to two hooks: `useApp` and `useHandler`.
+
+Example of an async plugin to handle promises:
+```typescript
+import innet, { HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
+
+function async(): HandlerPlugin {
+  return () => {
+    const app = useApp()
+
+    if (!(app instanceof Promise)) return NEXT
+
+    const handler = useHandler()
+
+    app.then(data => innet(data, handler))
+  }
+}
+```
+
+Try using both plugins together:
+```typescript
+const app = new Promise(resolve => resolve('test'))
+
+const handler = createHandler([
+  logger,
+  async,
+])
+// > 'logger: initialisation'
+
+innet(app, handler)
+// > 'logger: app', Promise
+
+await app
+// > 'logger: app', 'test'
+```
+
+Plugin order matters:
+```typescript
+const app = new Promise(resolve => resolve('test'))
+
+const handler = createHandler([
+  async, // change order
+  logger,
+])
+// > 'logger: initialisation'
+
+innet(app, handler)
+// nothing happens
+
+await app
+// > 'logger: app', 'test'
+```
+
+### Extending a Handler
+
+You can extend handlers using `createHandler` by passing plugins and an existing handler to build on:
+
+```typescript
+const handler1 = createHandler([
+  async,
+  sum,
+])
+
+const handler2 = createHandler([
+  logger,
+], handler1)
 ```
 
 ### Task Priority
 
-Control the execution priority of innet tasks with the second and the third optional argument.
+Control the execution priority of `innet` tasks with the third and the fourth optional arguments.
 
-- The third argument, when true, switches the order of the queue from the default FIFO to LIFO.
+- The fourth argument, when `true`, switches the order of the queue from the default FIFO to LIFO.
 - Lower priority values are executed before higher priority values.
-- Tasks with the same priority are ordered based on FIFO or LIFO, depending on the third parameter.
+- Tasks with the same priority are ordered based on FIFO or LIFO, depending on the fourth parameter.
 
-```typescript
-import innet from 'innet'
+```ts
+import { queueNanotask } from 'queue-nano-task'
 
-const log: any[] = []
+const handler = createHandler([logger])
 
-const logger = (value: any) => () => {
-  log.push(value)
-}
-
-innet(() => {
-  innet(logger('Mounted'), 2)
-  innet(logger('Mounting'), 1)
-  innet(logger('Rendering'), 0)
-  innet(logger('WillMount'), 1, true)
+queueNanotask(() => {
+  innet('Mounted', handler, 2)
+  innet('Mounting', handler, 1)
+  innet('Rendering', handler, 0)
+  innet('WillMount', handler, 1, true)
 })
 // log: ['Rendering', 'WillMount', 'Mounting', 'Mounted']
 ```
-
-In the example, 'Rendering' (priority 0) executes first, followed by 'WillMount' (priority 1, LIFO), then 'Mounting' (priority 1, FIFO), and finally 'Mounted' (priority 2).
-
-> Runs from the left to the right <br/>
-> `[true, ...,  false] > [true, ..., false] > ...` <br/>
-> `^        0        ^   ^       1        ^`
 
 Explore more general plugins and utilities in [@innet/utils](https://www.npmjs.com/package/@innet/utils)
 

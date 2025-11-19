@@ -1,3 +1,4 @@
-const dequeList = [];
+const NEXT = Symbol('Next');
+const PLUGINS = Symbol('Plugins');
 
-export { dequeList };
+export { NEXT, PLUGINS };

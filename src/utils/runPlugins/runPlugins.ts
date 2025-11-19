@@ -16,7 +16,7 @@ export function runPlugins (app: unknown, handler: Handler, plugins = handler[PL
   currentApp = app
   currentHandler = handler
 
-  for (let i = 0; i < plugins.length; i++) {
+  for (let i = plugins.length - 1; i > -1; i--) {
     if (plugins[i]() !== NEXT) return
   }
 }

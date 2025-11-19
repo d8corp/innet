@@ -1,2 +1,2 @@
-import type { Task } from './types';
-export default function innet(task: Task, priority?: number, force?: boolean): void;
+import { type Handler } from './types';
+export default function innet(app: unknown, handler?: Handler, priority?: number, force?: boolean): void;
