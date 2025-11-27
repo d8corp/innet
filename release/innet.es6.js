@@ -10,12 +10,13 @@ function useApp() {
     return currentApp;
 }
 function innet(app, handler = currentHandler, priority = 0, force) {
+    const hook = handler[HOOK]();
     queueNanotask(() => {
         const prevApp = currentApp;
         const prevHandler = currentHandler;
         currentApp = app;
         currentHandler = handler;
-        handler[HOOK]();
+        hook();
         currentApp = prevApp;
         currentHandler = prevHandler;
     }, priority, force);

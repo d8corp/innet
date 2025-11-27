@@ -8,4 +8,4 @@ export interface Handler {
 }
 export type HandlerPlugin = () => typeof NEXT | void;
 export type Plugin = (handler: Handler) => HandlerPlugin | void;
-export type Hook = () => void;
+export type Hook = () => () => void;

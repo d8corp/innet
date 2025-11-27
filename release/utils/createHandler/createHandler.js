@@ -15,7 +15,7 @@ function createHandler(plugins, extendedHandler) {
     const handler = extendHandler.extendHandler(extendedHandler || null);
     const createdPlugins = handler[constants.PLUGINS] = extendedHandler ? handler[constants.PLUGINS].slice() : [];
     if (!extendedHandler) {
-        handler[constants.HOOK] = () => { runPlugins.runPlugins(innet.useHandler()[constants.PLUGINS]); };
+        handler[constants.HOOK] = () => () => { runPlugins.runPlugins(innet.useHandler()[constants.PLUGINS]); };
     }
     activatePlugins.activatePlugins(plugins, createdPlugins, handler);
     return handler;

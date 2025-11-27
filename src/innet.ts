@@ -15,12 +15,14 @@ export function useApp<A> (): A {
 }
 
 export default function innet (app: unknown, handler: Handler = currentHandler, priority = 0, force?: boolean) {
+  const hook = handler[HOOK]()
+
   queueNanotask(() => {
     const prevApp = currentApp
     const prevHandler = currentHandler
     currentApp = app
     currentHandler = handler
-    handler[HOOK]()
+    hook()
     currentApp = prevApp
     currentHandler = prevHandler
   }, priority, force)

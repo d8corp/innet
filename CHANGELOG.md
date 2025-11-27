@@ -2,6 +2,9 @@
 
 ## v2.0
 
+### v2.0.1 [![28.11.2025](https://img.shields.io/date/1764284326)](https://github.com/d8corp/watch-state/tree/v2.0.1)
+- improve handler hook
+
 ### v2.0.0 [![28.11.2025](https://img.shields.io/date/1764283249)](https://github.com/d8corp/watch-state/tree/v2.0.0)
 - use [queue-nano-task](https://www.npmjs.com/package/queue-nano-task)
 - add handler hook
