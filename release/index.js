@@ -16,12 +16,13 @@ var useNewHandler = require('./hooks/useNewHandler/useNewHandler.js');
 
 
 exports["default"] = innet["default"];
+exports.useApp = innet.useApp;
+exports.useHandler = innet.useHandler;
+exports.HOOK = constants.HOOK;
 exports.NEXT = constants.NEXT;
 exports.PLUGINS = constants.PLUGINS;
 exports.activatePlugins = activatePlugins.activatePlugins;
 exports.createHandler = createHandler.createHandler;
 exports.extendHandler = extendHandler.extendHandler;
 exports.runPlugins = runPlugins.runPlugins;
-exports.useApp = runPlugins.useApp;
-exports.useHandler = runPlugins.useHandler;
 exports.useNewHandler = useNewHandler.useNewHandler;

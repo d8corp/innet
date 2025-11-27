@@ -7,5 +7,3 @@ var runPlugins = require('./runPlugins.js');
 
 
 exports.runPlugins = runPlugins.runPlugins;
-exports.useApp = runPlugins.useApp;
-exports.useHandler = runPlugins.useHandler;

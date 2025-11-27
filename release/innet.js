@@ -3,13 +3,28 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var queueNanoTask = require('queue-nano-task');
-require('./utils/index.js');
-var runPlugins = require('./utils/runPlugins/runPlugins.js');
+var constants = require('./constants.js');
 
-function innet(app, handler = runPlugins.useHandler(), priority = 0, force) {
+let currentHandler;
+let currentApp;
+function useHandler() {
+    return currentHandler;
+}
+function useApp() {
+    return currentApp;
+}
+function innet(app, handler = currentHandler, priority = 0, force) {
     queueNanoTask.queueNanotask(() => {
-        runPlugins.runPlugins(app, handler);
+        const prevApp = currentApp;
+        const prevHandler = currentHandler;
+        currentApp = app;
+        currentHandler = handler;
+        handler[constants.HOOK]();
+        currentApp = prevApp;
+        currentHandler = prevHandler;
     }, priority, force);
 }
 
 exports["default"] = innet;
+exports.useApp = useApp;
+exports.useHandler = useHandler;

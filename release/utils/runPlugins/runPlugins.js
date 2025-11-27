@@ -4,17 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var constants = require('../../constants.js');
 
-let currentHandler;
-let currentApp;
-function useHandler() {
-    return currentHandler;
-}
-function useApp() {
-    return currentApp;
-}
-function runPlugins(app, handler, plugins = handler[constants.PLUGINS]) {
-    currentApp = app;
-    currentHandler = handler;
+function runPlugins(plugins) {
     for (let i = plugins.length - 1; i > -1; i--) {
         if (plugins[i]() !== constants.NEXT)
             return;
@@ -22,5 +12,3 @@ function runPlugins(app, handler, plugins = handler[constants.PLUGINS]) {
 }
 
 exports.runPlugins = runPlugins;
-exports.useApp = useApp;
-exports.useHandler = useHandler;

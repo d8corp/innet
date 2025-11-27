@@ -2,12 +2,12 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var innet = require('../../innet.js');
 require('../../utils/index.js');
 var extendHandler = require('../../utils/extendHandler/extendHandler.js');
-var runPlugins = require('../../utils/runPlugins/runPlugins.js');
 
 function useNewHandler() {
-    return extendHandler.extendHandler(runPlugins.useHandler());
+    return extendHandler.extendHandler(innet.useHandler());
 }
 
 exports.useNewHandler = useNewHandler;

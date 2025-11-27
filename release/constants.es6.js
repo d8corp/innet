@@ -1,4 +1,5 @@
-const NEXT = Symbol('Next');
-const PLUGINS = Symbol('Plugins');
+const NEXT = Symbol('NEXT');
+const PLUGINS = Symbol('PLUGINS');
+const HOOK = Symbol('HOOK');
 
-export { NEXT, PLUGINS };
+export { HOOK, NEXT, PLUGINS };

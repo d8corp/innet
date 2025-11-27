@@ -1,11 +1,24 @@
 import { queueNanotask } from 'queue-nano-task';
-import './utils/index.es6.js';
-import { runPlugins, useHandler } from './utils/runPlugins/runPlugins.es6.js';
+import { HOOK } from './constants.es6.js';
 
-function innet(app, handler = useHandler(), priority = 0, force) {
+let currentHandler;
+let currentApp;
+function useHandler() {
+    return currentHandler;
+}
+function useApp() {
+    return currentApp;
+}
+function innet(app, handler = currentHandler, priority = 0, force) {
     queueNanotask(() => {
-        runPlugins(app, handler);
+        const prevApp = currentApp;
+        const prevHandler = currentHandler;
+        currentApp = app;
+        currentHandler = handler;
+        handler[HOOK]();
+        currentApp = prevApp;
+        currentHandler = prevHandler;
     }, priority, force);
 }
 
-export { innet as default };
+export { innet as default, useApp, useHandler };
