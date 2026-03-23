@@ -15,7 +15,8 @@ var useNewHandler = require('./hooks/useNewHandler/useNewHandler.js');
 
 
 
-exports["default"] = innet["default"];
+exports["default"] = innet.innet;
+exports.innet = innet.innet;
 exports.useApp = innet.useApp;
 exports.useHandler = innet.useHandler;
 exports.HOOK = constants.HOOK;

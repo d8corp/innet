@@ -22,4 +22,4 @@ function innet(app, handler = currentHandler, priority = 0, force) {
     }, priority, force);
 }
 
-export { innet as default, useApp, useHandler };
+export { innet, useApp, useHandler };

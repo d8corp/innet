@@ -2,6 +2,10 @@
 
 ## v2.0
 
+### v2.0.2 [![23.03.2026](https://img.shields.io/date/1774262573)](https://github.com/d8corp/watch-state/tree/v2.0.2)
+
+- Fix `require` import bugs
+
 ### v2.0.1 [![28.11.2025](https://img.shields.io/date/1764284326)](https://github.com/d8corp/watch-state/tree/v2.0.1)
 - improve handler hook
 

@@ -26,6 +26,6 @@ function innet(app, handler = currentHandler, priority = 0, force) {
     }, priority, force);
 }
 
-exports["default"] = innet;
+exports.innet = innet;
 exports.useApp = useApp;
 exports.useHandler = useHandler;

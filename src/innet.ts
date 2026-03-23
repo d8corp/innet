@@ -14,7 +14,7 @@ export function useApp<A> (): A {
   return currentApp as A
 }
 
-export default function innet (app: unknown, handler: Handler = currentHandler, priority = 0, force?: boolean) {
+export function innet (app: unknown, handler: Handler = currentHandler, priority = 0, force?: boolean) {
   const hook = handler[HOOK]()
 
   queueNanotask(() => {
