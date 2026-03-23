@@ -1,5 +1,4 @@
-import { innet } from './innet.es6.js';
-export { innet as default, innet, useApp, useHandler } from './innet.es6.js';
+export { innet, useApp, useHandler } from './innet.es6.js';
 import './types.es6.js';
 export { HOOK, NEXT, PLUGINS } from './constants.es6.js';
 import './utils/index.es6.js';

@@ -103,7 +103,7 @@ The main innet function accepts two required parameters and two optional:
 Example usage:
 
 ```typescript
-import innet from 'innet'
+import { innet } from 'innet'
 
 import app from './app' // what to do
 import handler from './handler' // how to do it
@@ -159,7 +159,7 @@ function logger(): HandlerPlugin {
 
 Example of an async plugin to handle promises:
 ```typescript
-import innet, { HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
+import { innet, HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
 function async(): HandlerPlugin {
   return () => {
