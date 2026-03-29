@@ -1,4 +1,4 @@
-import innet, { createHandler, type HandlerPlugin, NEXT, useApp, useHandler } from '.'
+import { createHandler, type HandlerPlugin, innet, NEXT, useApp, useHandler } from '.'
 
 describe('innet', () => {
   test('empty plugins', () => {

@@ -9,17 +9,19 @@ function useHandler() {
 function useApp() {
     return currentApp;
 }
+function net(hook, app, handler = currentHandler) {
+    const prevApp = currentApp;
+    const prevHandler = currentHandler;
+    currentApp = app;
+    currentHandler = handler;
+    const result = hook();
+    currentApp = prevApp;
+    currentHandler = prevHandler;
+    return result;
+}
 function innet(app, handler = currentHandler, priority = 0, force) {
     const hook = handler[HOOK]();
-    queueNanotask(() => {
-        const prevApp = currentApp;
-        const prevHandler = currentHandler;
-        currentApp = app;
-        currentHandler = handler;
-        hook();
-        currentApp = prevApp;
-        currentHandler = prevHandler;
-    }, priority, force);
+    queueNanotask(net.bind(handler, hook, app, handler), priority, force);
 }
 
-export { innet, useApp, useHandler };
+export { innet, net, useApp, useHandler };

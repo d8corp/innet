@@ -2,6 +2,10 @@
 
 ## v2.1
 
+### v2.1.1 [![29.03.2026](https://img.shields.io/date/1774796794)](https://github.com/d8corp/watch-state/tree/v2.1.1)
+
+- Add `net`
+
 ### v2.1.0 [![23.03.2026](https://img.shields.io/date/1774264001)](https://github.com/d8corp/watch-state/tree/v2.1.0)
 
 - Remove default export
